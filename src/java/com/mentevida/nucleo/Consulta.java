@@ -4,21 +4,26 @@ import java.time.LocalDate;
 
 public class Consulta {
     private int idConsulta;
-    private LocalDate dataConsulta;
+    private int duracao;
+    private double valor;
     private Medico medico;
     private Paciente paciente;
+    
+    public Consulta() {} // Construtor para objetos genéricos
 
-    public Consulta(int idConsulta, LocalDate dataConsulta, Medico medico, Paciente paciente) {
+    public Consulta(int idConsulta, int duracao, double valor, Medico medico, Paciente paciente) {
         this.idConsulta = idConsulta;
-        this.dataConsulta = dataConsulta;
+        this.duracao = duracao;
+        this.valor = valor;
         this.medico = medico;
         this.paciente = paciente;
     }
     
     public String toString() {
         return "[idConsulta=" + getIdConsulta() +
-                "dataConsulta=" + getDataConsulta() +
-                "medico=" + getMedico().getIdUsuario() +
+                "duracao=" + getDuracao() +
+                "valor=" + getValor() +
+                "medico=" + getMedico().getIdMedico() +
                 "paciente=" + getPaciente().getIdPaciente() +
                 "]";
     }
@@ -31,12 +36,20 @@ public class Consulta {
         this.idConsulta = idConsulta;
     }
 
-    public LocalDate getDataConsulta() {
-        return dataConsulta;
+    public int getDuracao() {
+        return duracao;
     }
 
-    public void setDataConsulta(LocalDate dataConsulta) {
-        this.dataConsulta = dataConsulta;
+    public void setDuracao(int duracao) {
+        this.duracao = duracao;
+    }
+
+    public double getValor() {
+        return valor;
+    }
+
+    public void setValor(double valor) {
+        this.valor = valor;
     }
 
     public Medico getMedico() {

@@ -172,8 +172,8 @@ public class UsuarioDAO {
     
     public static void main(String[] args) throws Exception {
         UsuarioDAO dao = new UsuarioDAO();
-        String[] usuario = {"3", "user", "user", "false"};
-        dao.alterarUsuario(usuario);
+        String[] usuario = {"3", "bianca_", "user", "false"};
+        dao.cadastrarUsuario(usuario);
         List<String[]> list = dao.mostrarTodosUsuarios();
         for (int i = 0; i < list.size(); i++) {
             String[] result = list.get(i);

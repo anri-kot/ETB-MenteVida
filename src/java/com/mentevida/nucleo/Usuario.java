@@ -5,6 +5,8 @@ public abstract class Usuario {
     private String username;
     private String senha;
     private boolean isAdmin;
+    
+    public Usuario(){} // construtor generico
 
     public Usuario(int idUsuario, String username, String senha, boolean isAdmin) {
         this.idUsuario = idUsuario;

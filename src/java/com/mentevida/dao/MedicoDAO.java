@@ -116,7 +116,7 @@ public class MedicoDAO {
         }
     }
     
-    public void atualizarMedico(Medico oMedico) throws Exception {
+    public void alterarMedico(Medico oMedico) throws Exception {
         PreparedStatement st = null;
         try {
             st = con.prepareStatement("update medico set nome = ?, especialidade = ?, telefone = ?, email = ?" +
@@ -171,13 +171,5 @@ public class MedicoDAO {
         if (rs != null) {
             rs.close();
         }
-    }
-    
-    public static void main(String[] args) throws Exception {
-        Medico medico = new Medico(4, "DADADADA", "Psicologia", "521465215", "dadada@email", 4, "dada_user", "123", false);
-        MedicoDAO dao = new MedicoDAO();
-        dao.cadastrarMedico(medico);
-        System.out.println(dao.mostrarTodosMedicos());
-        
     }
 }

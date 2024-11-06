@@ -5,20 +5,20 @@ import java.time.LocalDate;
 public class Relatorio {
     private int idRelatorio;
     private LocalDate dataRelatorio;
-    private String conteudo;
+    private String endereco;
     private Consulta consulta;
 
-    public Relatorio(int idRelatorio, LocalDate dataRelatorio, String conteudo, Consulta consulta) {
+    public Relatorio(int idRelatorio, LocalDate dataRelatorio, String endereco, Consulta consulta) {
         this.idRelatorio = idRelatorio;
         this.dataRelatorio = dataRelatorio;
-        this.conteudo = conteudo;
+        this.endereco = endereco;
         this.consulta = consulta;
     }
     
     public String toString() {
         return "[idRelatorio=" + getIdRelatorio() +
                 "dataRelatorio=" + getDataRelatorio() +
-                "conteudo=" + getConteudo() +
+                "endereco=" + getEndereco() +
                 "consulta=" + getConsulta().getIdConsulta() +
                 "]";
     }
@@ -39,12 +39,12 @@ public class Relatorio {
         this.dataRelatorio = dataRelatorio;
     }
 
-    public String getConteudo() {
-        return conteudo;
+    public String getEndereco() {
+        return endereco;
     }
 
-    public void setConteudo(String conteudo) {
-        this.conteudo = conteudo;
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
     }
 
     public Consulta getConsulta() {

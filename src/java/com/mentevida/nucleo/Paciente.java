@@ -9,6 +9,8 @@ public class Paciente {
     private String telefone;
     private String email;
     private String historicoMedico;
+    
+    public Paciente() {} // Construtor para gerar objetos genéricos
 
     public Paciente(int idPaciente, String nome, LocalDate dataNascimento, String telefone, String email, String historicoMedico) {
         this.idPaciente = idPaciente;

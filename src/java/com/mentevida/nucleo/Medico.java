@@ -7,6 +7,8 @@ public class Medico extends Usuario {
     private String especialidade;
     private String telefone;
     private String email;
+    
+    public Medico() {} // Construtor para gerar objetos genéricos
 
     public Medico(int idMedico, String nome, String especialidade, String telefone, String email, int idUsuario, String username, String senha, boolean isAdmin) {
         super(idUsuario, username, senha, isAdmin);
