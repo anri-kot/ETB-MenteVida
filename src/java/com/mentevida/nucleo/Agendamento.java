@@ -22,9 +22,9 @@ public class Agendamento {
     public String toString() {
         return "[idAgendamento=" + getIdAgendamento() +
                 "dataAgendamento=" + getDataAgendamento() +
-                "status=" + isStatus() +
-                "funcionario=" + getFuncionario().getIdUsuario() +
-                "medico=" + getMedico().getIdUsuario() +
+                "status=" + getStatus() +
+                "funcionario=" + getFuncionario().getIdFuncionario() +
+                "medico=" + getMedico().getIdMedico() +
                 "paciente=" + getPaciente().getIdPaciente() +
                 "]";
     }
@@ -45,7 +45,7 @@ public class Agendamento {
         this.dataAgendamento = dataAgendamento;
     }
 
-    public boolean isStatus() {
+    public boolean getStatus() {
         return status;
     }
 

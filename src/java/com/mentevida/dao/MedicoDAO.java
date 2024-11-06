@@ -1,6 +1,5 @@
 package com.mentevida.dao;
 
-import com.mentevida.auth.Encryptor;
 import com.mentevida.nucleo.Medico;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
@@ -92,12 +91,15 @@ public class MedicoDAO {
     public void cadastrarMedico(Medico oMedico) throws Exception, NoSuchAlgorithmException {
         PreparedStatement st = null;
         try {
-            // Gerar usuário do médico
-            String username = oMedico.getUsername();
-            String senha = Encryptor.encrypt(oMedico.getSenha());
-            String admin = Boolean.toString(oMedico.isAdmin());
-            String[] usuario = {"", username, senha, admin}; // [idUsuario, username, senha, admin] -- admin = "true" / "false"
-            usu.cadastrarUsuario(usuario);
+            // Caso queira criar um novo usuário justo ao perfil do médico
+            if (oMedico.getIdUsuario() <= 0) {
+                // Gerar usuário do médico
+                String username = oMedico.getUsername();
+                String senha = oMedico.getSenha();
+                String admin = Boolean.toString(oMedico.isAdmin());
+                String[] usuario = {"", username, senha, admin}; // [idUsuario, username, senha, admin] -- admin = "true" / "false"
+                usu.cadastrarUsuario(usuario);
+            }
             
             st = con.prepareStatement("insert into medico (nome, especialidade, telefone, email, idUsuario) values (?, ?, ?, ?, ?)"); 
             
@@ -150,6 +152,7 @@ public class MedicoDAO {
 
     private Medico rowToMedico(ResultSet rs) throws Exception, Exception {
         int idUsuario = rs.getInt("idUsuario");
+        
         String[] usuario = usu.mostrarIdUsuario(idUsuario).get(0); // [id, username, senha, admin]
         String username = usuario[1];
         String senha = usuario[2];

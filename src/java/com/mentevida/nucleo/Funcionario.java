@@ -6,6 +6,8 @@ public class Funcionario extends Usuario {
     private String telefone;
     private String email;
     private String cargo;
+    
+    public Funcionario(){} // Construtor para gerar objectos genéricos
 
     public Funcionario(int idFuncionario, String nome, String telefone, String email, String cargo, int idUsuario, String username, String senha, boolean isAdmin) {
         super(idUsuario, username, senha, isAdmin);

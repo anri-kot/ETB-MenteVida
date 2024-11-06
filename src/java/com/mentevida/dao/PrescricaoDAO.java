@@ -18,7 +18,7 @@ public class PrescricaoDAO {
         con = ConnectionManager.getConnection();
     }
     
-     /* -- SQL Operations -- */
+    /* -- SQL Operations -- */
     
     // Select
     
