@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 06, 2024 at 03:16 AM
+-- Generation Time: Nov 07, 2024 at 12:18 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -38,6 +38,14 @@ CREATE TABLE `agendamento` (
   `funcionario_id_funcionario` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `agendamento`
+--
+
+INSERT INTO `agendamento` (`id_agendamento`, `data_agendamento`, `status`, `paciente_id_paciente`, `medico_id_medico`, `funcionario_id_funcionario`) VALUES
+(2, '2024-05-12', 0, 2, 1, 1),
+(3, '2021-07-22', 0, 5, 2, 2);
+
 -- --------------------------------------------------------
 
 --
@@ -52,17 +60,13 @@ CREATE TABLE `consulta` (
   `id_medico` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- --------------------------------------------------------
-
 --
--- Table structure for table `filetest`
+-- Dumping data for table `consulta`
 --
 
-CREATE TABLE `filetest` (
-  `id` int(11) NOT NULL,
-  `fileName` varchar(200) NOT NULL,
-  `path` varchar(200) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+INSERT INTO `consulta` (`id_consulta`, `duracao`, `valor`, `id_paciente`, `id_medico`) VALUES
+(2, 40, 225, 5, 2),
+(3, 60, 275, 6, 2);
 
 -- --------------------------------------------------------
 
@@ -78,6 +82,14 @@ CREATE TABLE `funcionario` (
   `cargo` varchar(100) DEFAULT NULL,
   `idUsuario` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `funcionario`
+--
+
+INSERT INTO `funcionario` (`id_funcionario`, `nome`, `telefone`, `email`, `cargo`, `idUsuario`) VALUES
+(1, 'Bianca Almeida', '8521597531', 'biancaal@hotmail.com', 'Recepcionista', 6),
+(2, 'Mariana Almeida', '12345678995', 'mariana@email.com', 'Gerente', 7);
 
 -- --------------------------------------------------------
 
@@ -99,7 +111,8 @@ CREATE TABLE `medico` (
 --
 
 INSERT INTO `medico` (`id_medico`, `nome`, `especialidade`, `telefone`, `email`, `idUsuario`) VALUES
-(1, 'DADADADA', 'Psicologia', '521465215', 'dadada@email', 4);
+(1, 'DADADADA', 'Psicologia', '521465215', 'dadada@email', 4),
+(2, 'Rafael Mendes', 'Psiquiatria', '1546582145', 'faelmendes@gmail.com', 5);
 
 -- --------------------------------------------------------
 
@@ -113,7 +126,7 @@ CREATE TABLE `paciente` (
   `data_nascimento` date NOT NULL,
   `telefone` varchar(15) DEFAULT NULL,
   `email` varchar(100) DEFAULT NULL,
-  `historico_medico` text DEFAULT NULL
+  `historico_medico` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -121,7 +134,9 @@ CREATE TABLE `paciente` (
 --
 
 INSERT INTO `paciente` (`id_paciente`, `nome`, `data_nascimento`, `telefone`, `email`, `historico_medico`) VALUES
-(2, 'Evil Neuro', '2020-01-01', '999999999', 'vedal987@email', 'swarmadjskajdk');
+(2, 'Evil Neuro', '2020-01-01', '999999999', 'vedal987@email', 'swarmadjskajdk'),
+(5, 'vedal', '1998-01-12', '9854123541', 'vedal@email', 'C:\\historico\\historico2.pdf'),
+(6, 'lucas', '2008-05-21', '8541254615', 'lucas@email', 'C:\\historico\\historico2.pdf');
 
 -- --------------------------------------------------------
 
@@ -134,8 +149,17 @@ CREATE TABLE `prescricao` (
   `data_prescricao` date NOT NULL,
   `medicamentos` text DEFAULT NULL,
   `dosagem` varchar(100) DEFAULT NULL,
+  `comentario` varchar(500) DEFAULT NULL,
   `id_consulta` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `prescricao`
+--
+
+INSERT INTO `prescricao` (`id_prescricao`, `data_prescricao`, `medicamentos`, `dosagem`, `comentario`, `id_consulta`) VALUES
+(2, '2024-12-11', 'medicamento 2, medicamento 3, medicamento 4', 'dosagem A e B', 'Isto é um outro comentário', 3),
+(3, '2024-12-20', 'medicamento 4, medicamento 6, medicamento 4', 'dosagem F e D', 'Isto é mais um comentário', 2);
 
 -- --------------------------------------------------------
 
@@ -149,6 +173,13 @@ CREATE TABLE `relatorio` (
   `endereco` varchar(200) DEFAULT NULL,
   `consulta_id_consulta` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `relatorio`
+--
+
+INSERT INTO `relatorio` (`id_relatorio`, `data_relatorio`, `endereco`, `consulta_id_consulta`) VALUES
+(2, '2022-09-15', 'C\\Relatorios\\relatorio2.pdf', 3);
 
 -- --------------------------------------------------------
 
@@ -170,7 +201,10 @@ CREATE TABLE `usuario` (
 INSERT INTO `usuario` (`idUsuario`, `username`, `senha`, `admin`) VALUES
 (2, 'admin', '3hzi4r81f30g81bo5orq5ddbh3uuqoo28158si9djbh20p0sgo', 1),
 (3, 'user', '4gkmw3ki6ko6ovge1xyyi37vdki9qnxh57lqfbcjyf64sx98b', 0),
-(4, 'dada_user', '4ai62shviykclpd4zadmjhgdc6it8y6lqz2jfnj10di35visru', 0);
+(4, 'dada_user', '4ai62shviykclpd4zadmjhgdc6it8y6lqz2jfnj10di35visru', 0),
+(5, 'rafaelmen', '4gkmw3ki6ko6ovge1xyyi37vdki9qnxh57lqfbcjyf64sx98b', 0),
+(6, 'bianca_', '4gkmw3ki6ko6ovge1xyyi37vdki9qnxh57lqfbcjyf64sx98b', 0),
+(7, 'mariana1212', '45auvrm8e57zm8y2dyh0s3ows1n3bit9vrxsqcaikpyj7j7izn', 1);
 
 --
 -- Indexes for dumped tables
@@ -192,12 +226,6 @@ ALTER TABLE `consulta`
   ADD PRIMARY KEY (`id_consulta`),
   ADD KEY `id_paciente` (`id_paciente`),
   ADD KEY `id_medico` (`id_medico`);
-
---
--- Indexes for table `filetest`
---
-ALTER TABLE `filetest`
-  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `funcionario`
@@ -248,49 +276,49 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT for table `agendamento`
 --
 ALTER TABLE `agendamento`
-  MODIFY `id_agendamento` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_agendamento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `consulta`
 --
 ALTER TABLE `consulta`
-  MODIFY `id_consulta` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_consulta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `filetest`
+-- AUTO_INCREMENT for table `funcionario`
 --
-ALTER TABLE `filetest`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `funcionario`
+  MODIFY `id_funcionario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `medico`
 --
 ALTER TABLE `medico`
-  MODIFY `id_medico` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_medico` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `paciente`
 --
 ALTER TABLE `paciente`
-  MODIFY `id_paciente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_paciente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `prescricao`
 --
 ALTER TABLE `prescricao`
-  MODIFY `id_prescricao` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_prescricao` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `relatorio`
 --
 ALTER TABLE `relatorio`
-  MODIFY `id_relatorio` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_relatorio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Constraints for dumped tables
