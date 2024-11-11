@@ -7,13 +7,13 @@ import com.mentevida.nucleo.Paciente;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
 public class AgendamentoDAO {
-    final DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    final DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'hh:mm");
     private final Connection con;
     
     public AgendamentoDAO() throws Exception{
@@ -132,7 +132,7 @@ public class AgendamentoDAO {
 
     private Agendamento rowToAgendamento(ResultSet rs) throws Exception {
         int idAgendamento = rs.getInt("id_agendamento");
-        LocalDate dataAgendamento = LocalDate.parse(rs.getString("data_agendamento"), dtf);
+        LocalDateTime dataAgendamento = LocalDateTime.parse(rs.getString("data_agendamento"), dtf);
         Boolean status = rs.getBoolean("status");
         Paciente paciente = new Paciente();
         paciente.setIdPaciente(rs.getInt("paciente_id_paciente"));

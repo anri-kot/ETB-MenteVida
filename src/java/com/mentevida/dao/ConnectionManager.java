@@ -32,7 +32,7 @@ public class ConnectionManager {
     public static Connection getConnection()
             throws ClassNotFoundException, FileNotFoundException, SQLException, IOException {
         Properties prop = new Properties(); // receives properties from .properties file
-        prop.load(new FileInputStream("prop.properties"));
+        prop.load(new FileInputStream("/home/kuroneko/Dev/Java/netbeans/ClinicaMenteVida/prop.properties"));
 
         // assigning properties to variables
         user = prop.getProperty("user");

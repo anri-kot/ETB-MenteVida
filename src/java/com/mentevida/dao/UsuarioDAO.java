@@ -89,8 +89,8 @@ public class UsuarioDAO {
         PreparedStatement st = null;
         ResultSet rs = null;
         try {
-            st = con.prepareStatement("select * from usuario where username like ?");
-            st.setString(1, "%" + input + "%");
+            st = con.prepareStatement("select * from usuario where username = ?");
+            st.setString(1, input);
             rs = st.executeQuery();
             
             String idUsuario;

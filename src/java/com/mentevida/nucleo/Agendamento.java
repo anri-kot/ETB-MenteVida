@@ -1,16 +1,17 @@
 package com.mentevida.nucleo;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Agendamento {
     private int idAgendamento;
-    private LocalDate dataAgendamento;
+    private LocalDateTime dataAgendamento;
     private boolean status;
     private Funcionario funcionario;
     private Medico medico;
     private Paciente paciente;
 
-    public Agendamento(int idAgendamento, LocalDate dataAgendamento, boolean status, Funcionario funcionario, Medico medico, Paciente paciente) {
+    public Agendamento(int idAgendamento, LocalDateTime dataAgendamento, boolean status, Funcionario funcionario, Medico medico, Paciente paciente) {
         this.idAgendamento = idAgendamento;
         this.dataAgendamento = dataAgendamento;
         this.status = status;
@@ -37,11 +38,11 @@ public class Agendamento {
         this.idAgendamento = idAgendamento;
     }
 
-    public LocalDate getDataAgendamento() {
+    public LocalDateTime getDataAgendamento() {
         return dataAgendamento;
     }
 
-    public void setDataAgendamento(LocalDate dataAgendamento) {
+    public void setDataAgendamento(LocalDateTime dataAgendamento) {
         this.dataAgendamento = dataAgendamento;
     }
 

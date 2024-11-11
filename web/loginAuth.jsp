@@ -1,24 +1,34 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="com.mentevida.auth.Encryptor"%>
+<%@page import="com.mentevida.dao.UsuarioDAO"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Autentifica Login</title>
+        <title>JSP Page</title>
     </head>
     <body>
         <%
-            Encryptor enc = new Encryptor();
-            
             String _username = request.getParameter("username");
-            String _password = request.getParameter("password");
+            String _password = Encryptor.encrypt(request.getParameter("password"));
             
-            String thePassword = enc.encrypt("admin");
-            if (!thePassword.equals(enc.encrypt(_password))) {
-                out.print("Login inválido");
-            } else {
-                out.print("Login válido");
+            UsuarioDAO dao = new UsuarioDAO();
+            try {
+                String[] user = dao.mostrarUsernameUsuarios(_username).get(0);
+                    if (!user[2].equals(_password)) {
+                        out.print("Senha incorreta.");
+                        out.print("<a href='index.html'>Voltar</a>");
+                        session.setAttribute("usuarioLoggado", false);
+                    } else {
+                        session.setAttribute("usuarioLogado", true);
+                        response.sendRedirect("home.jsp");
+                    }
+            } catch (Exception ignore) {
+                out.print("Usuário inválido.<br>");
+                out.print("<a href='index.html'>Voltar</a>");
+                session.setAttribute("usuarioLoggado", false);
             }
+
         %>
     </body>
 </html>
