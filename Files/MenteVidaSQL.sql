@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Nov 07, 2024 at 12:18 AM
+-- Host: localhost
+-- Generation Time: Nov 11, 2024 at 08:37 AM
 -- Server version: 10.4.32-MariaDB
--- PHP Version: 8.0.30
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -31,7 +31,7 @@ USE `mentevida`;
 
 CREATE TABLE `agendamento` (
   `id_agendamento` int(11) NOT NULL,
-  `data_agendamento` date DEFAULT NULL,
+  `data_agendamento` datetime DEFAULT NULL,
   `status` tinyint(4) DEFAULT NULL,
   `paciente_id_paciente` int(11) NOT NULL,
   `medico_id_medico` int(11) NOT NULL,
@@ -43,8 +43,10 @@ CREATE TABLE `agendamento` (
 --
 
 INSERT INTO `agendamento` (`id_agendamento`, `data_agendamento`, `status`, `paciente_id_paciente`, `medico_id_medico`, `funcionario_id_funcionario`) VALUES
-(2, '2024-05-12', 0, 2, 1, 1),
-(3, '2021-07-22', 0, 5, 2, 2);
+(2, '2024-05-12 00:00:00', 0, 2, 1, 1),
+(3, '2021-07-22 00:00:00', 0, 5, 2, 2),
+(4, '2024-11-12 10:00:00', 0, 5, 2, 1),
+(5, '2024-11-12 12:00:00', 1, 5, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -136,7 +138,10 @@ CREATE TABLE `paciente` (
 INSERT INTO `paciente` (`id_paciente`, `nome`, `data_nascimento`, `telefone`, `email`, `historico_medico`) VALUES
 (2, 'Evil Neuro', '2020-01-01', '999999999', 'vedal987@email', 'swarmadjskajdk'),
 (5, 'vedal', '1998-01-12', '9854123541', 'vedal@email', 'C:\\historico\\historico2.pdf'),
-(6, 'lucas', '2008-05-21', '8541254615', 'lucas@email', 'C:\\historico\\historico2.pdf');
+(6, 'lucas', '2008-05-21', '8541254615', 'lucas@email', 'C:\\historico\\historico2.pdf'),
+(7, 'John Kennedy', '2024-11-21', '854123645', 'asdasdsadsadsa@dsakdjsakdsadsa', ''),
+(8, 'Roberto Amaral', '2003-12-11', '856214638', 'robertoaldsakd@email.com', '/home/kuroneko/Dev/Uploads/Pacientes/historico8'),
+(9, 'Murilo Couto', '1986-06-27', '7778895462', '785214569lkjhg@email.com', '/home/kuroneko/Dev/Uploads/Pacientes/historico9');
 
 -- --------------------------------------------------------
 
@@ -147,7 +152,7 @@ INSERT INTO `paciente` (`id_paciente`, `nome`, `data_nascimento`, `telefone`, `e
 CREATE TABLE `prescricao` (
   `id_prescricao` int(11) NOT NULL,
   `data_prescricao` date NOT NULL,
-  `medicamentos` text DEFAULT NULL,
+  `medicamentos` varchar(200) DEFAULT NULL,
   `dosagem` varchar(100) DEFAULT NULL,
   `comentario` varchar(500) DEFAULT NULL,
   `id_consulta` int(11) DEFAULT NULL
@@ -276,7 +281,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT for table `agendamento`
 --
 ALTER TABLE `agendamento`
-  MODIFY `id_agendamento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_agendamento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `consulta`
@@ -300,7 +305,7 @@ ALTER TABLE `medico`
 -- AUTO_INCREMENT for table `paciente`
 --
 ALTER TABLE `paciente`
-  MODIFY `id_paciente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_paciente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `prescricao`

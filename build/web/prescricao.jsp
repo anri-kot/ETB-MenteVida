@@ -1,10 +1,11 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="A Clínica Mente & Vida oferece serviços especializados para o diagnóstico e tratamento de transtornos mentais.">
+    <meta name="description" content="A Clínica Mente & Vida oferece serviÃ§os especializados para o diagnóstico e tratamento de transtornos mentais.">
     <title>Prescrição</title>
     <link rel="stylesheet" href="css/prescricao.css">
     
@@ -19,12 +20,12 @@
         <div class="menu">
             <nav class="navbar">
                 <ul>
-                    <li><a href="home.html">Home</a></li>
-                    <li><a href="paciente.html">Pacientes</a></li>
-                    <li><a href="agendamento.html">Agendamentos</a></li>
-                    <li><a href="prescricao.html">Prescrições</a></li>
-                    <li><a href="relatorio.html">Relatórios</a></li>
-                    <li><a href="perfil.html">Perfil</a></li>
+                    <li><a href="home.jsp">Home</a></li>
+                    <li><a href="paciente.jsp">Pacientes</a></li>
+                    <li><a href="agendamento.jsp">Agendamentos</a></li>
+                    <li><a href="prescricao.jsp">Prescrições</a></li>
+                    <li><a href="relatorio.jsp">Relatórios</a></li>
+                    <li><a href="perfil.jsp">Perfil</a></li>
                 </ul>
             </nav>
         </div>
@@ -32,25 +33,28 @@
 
     <h2>Cadastrar Prescrições</h2>  
 
-    <form id="form-prescricao" >
+    <form id="form-prescricao" action="CadastrarPrescricao" method="POST">
+        <label for="consulta">Consulta:</label>
+        <input type="number" id="consulta" name="consulta" placeholder="Entre com o id da consulta" required></input>
+        
         <label for="data_prescricao">Data da Prescrição:</label>
-        <input type="datetime-local" id="data_prescricao" name="data_prescricao" required>
+        <input type="date" id="data_prescricao" name="data_prescricao" required>
 
         <label for="medicamentos">Medicamento:</label>
-        <input type="text" id="medicamentos" name="medicamentos" placeholder="Entre com o medicamento" required>
+        <input type="text" id="medicamentos" name="medicamentos" maxlength="200" placeholder="Entre com o medicamento" required>
 
         <label for="dosagem">Dosagem:</label>
-        <input type="text" id="dosagem" name="dosagem" placeholder="Entre com a dosagem" required>
+        <input type="text" id="dosagem" name="dosagem" maxlength="200" placeholder="Entre com a dosagem" required>
 
         <label for="comentario">Instruções:</label>
-        <textarea id="comentario" name="comentario" rows="8" placeholder="Comentário" required></textarea>
-
+        <textarea id="comentario" name="comentario" maxlength="500" rows="8" placeholder="Comentário"></textarea>
+        
         <button type="submit" class="btn">Efetuar Registro</button>
     </form>
 
     <div class="container">
-        <a href="home.html" class="botoes" >Home</a>
-        <a href="relatorio.html" class="botoes" >Voltar</a>
+        <a href="home.jsp" class="botoes" >Home</a>
+        <a href="relatorio.jsp" class="botoes" >Voltar</a>
     </div>
 
     <footer class="rodape">

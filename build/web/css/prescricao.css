@@ -72,7 +72,7 @@ form label {
 
 /* Estilo dos campos de entrada */
 form input[type="text"],
-form input[type="datetime-local"],
+form input[type="date"],
 form textarea {
     width: 100%;
     padding: 10px;

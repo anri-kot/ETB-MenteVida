@@ -1,3 +1,4 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -34,7 +35,7 @@
                 <input type="email" id="email" name="email" placeholder="paciente@exemplo.com" required>
 
                 <label for="historico_medico">Histórico Médico:</label>
-                <textarea id="historico_medico" name="historico_medico" rows="4" placeholder="Descreva o histórico médico do paciente"></textarea>
+                <textarea id="historico_medico" name="historico_medico" rows="4" placeholder="Descreva o Histórico Médico do paciente"></textarea>
 
                 <input type="submit" value="Efetuar Cadastro" class="btn cadastrar">
             </form>

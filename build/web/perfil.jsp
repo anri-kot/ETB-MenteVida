@@ -1,18 +1,19 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Perfil - Clínica Mente & Vida">
+    <meta name="description" content="Perfil - ClÃ­nica Mente & Vida">
   
     <link rel="stylesheet" href="css/perfil.css"> <!-- Link para o arquivo CSS -->
 </head>
 <body>
     <header class="topo">
-        <img src="img/psc.png" alt="Logo da Clínica" class="clinica-imagem">
-        <h1>Clínica Mente e Vida</h1>
-        <p>Saúde Mental e Bem-Estar</p>
+        <img src="img/psc.png" alt="Logo da ClÃ­nica" class="clinica-imagem">
+        <h1>ClÃ­nica Mente e Vida</h1>
+        <p>SaÃºde Mental e Bem-Estar</p>
 
         <div class="menu">
             <nav class="navbar">
@@ -20,8 +21,8 @@
                     <li><a href="home.html">Home</a></li>
                     <li><a href="paciente.html">Pacientes</a></li>
                     <li><a href="agendamento.html">Agendamentos</a></li>
-                    <li><a href="prescricao.html">Prescrições</a></li>
-                    <li><a href="relatorio.html">Relatórios</a></li>
+                    <li><a href="prescricao.html">PrescriÃ§Ãµes</a></li>
+                    <li><a href="relatorio.html">RelatÃ³rios</a></li>
                     <li><a href="perfil.html">Perfil</a></li>
                 </ul>
             </nav>

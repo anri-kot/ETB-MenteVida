@@ -44,6 +44,7 @@ public class CadastrarAgendamento extends HttpServlet {
             Agendamento oAgendamento = new Agendamento(0, data_agendamento, status, f, m, p);
             
             dao.cadastrarAgendamento(oAgendamento);
+            out.println("<head><meta charset=\"utf-8\"><head>");
             out.println("<script>");
             out.println("alert('Agendamento cadastrado com sucesso!')");
             out.println("location='agendamento.jsp'");

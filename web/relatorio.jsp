@@ -1,3 +1,4 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -16,12 +17,12 @@
         <p>Saúde Mental e Bem-Estar</p>
         <nav class="menu">
             <ul>
-                <li><a href="home.html">Home</a></li>
-                <li><a href="paciente.html">Pacientes</a></li>
-                <li><a href="agendamento.html">Agendamentos</a></li>
-                <li><a href="prescricao.html">Prescrições</a></li>
-                <li><a href="relatorio.html" class="active">Relatórios</a></li>
-                <li><a href="perfil.html">Perfil</a></li>
+                <li><a href="home.jsp">Home</a></li>
+                <li><a href="paciente.jsp">Pacientes</a></li>
+                <li><a href="agendamento.jsp">Agendamentos</a></li>
+                <li><a href="prescricao.jsp">Prescrições</a></li>
+                <li><a href="relatorio.jsp" class="active">Relatórios</a></li>
+                <li><a href="perfil.jsp">Perfil</a></li>
             </ul>
         </nav>
     </header>
@@ -50,7 +51,7 @@
             
         </table>
         <!-- Botão para adicionar um novo relatório, agora abaixo da tabela -->
-        <p><a href="NovoRelatorio.html" class="novo-relatorio">Novo Relatório</a></p>
+        <p><a href="NovoRelatorio.jsp" class="novo-relatorio">Novo Relatório</a></p>
     </main>
 
     <footer class="rodape">

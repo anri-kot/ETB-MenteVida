@@ -13,13 +13,13 @@ import jakarta.servlet.http.Part;
 import java.io.PrintWriter;
 import java.time.LocalDate;
 
-@WebServlet(name = "CadastraPaciente", urlPatterns = {"/CadastraPaciente"})
+@WebServlet(name = "CadastrarPaciente", urlPatterns = {"/CadastrarPaciente"})
 @MultipartConfig (
     fileSizeThreshold = 1024 * 1024 * 1,
     maxFileSize = 1024 * 1024 * 10,
     maxRequestSize = 1024 * 1024 * 100
 )
-public class CadastraPaciente extends HttpServlet {
+public class CadastrarPaciente extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -50,6 +50,7 @@ public class CadastraPaciente extends HttpServlet {
             dao.updatePaciente(paciente);
             
             PrintWriter pw = response.getWriter();
+            pw.println("<head><meta charset=\"utf-8\"><head>");
             pw.println("<script>");
             pw.println("alert('Paciente cadastrado com sucesso!')");
             pw.println("location='paciente.jsp'");
