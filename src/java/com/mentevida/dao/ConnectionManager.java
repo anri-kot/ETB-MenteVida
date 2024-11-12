@@ -9,15 +9,15 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class ConnectionManager {
-
-    protected static ConnectionManager connect; // receives the connection
-
     // variables to assign properties to
     protected static String user;
     protected static String password;
     protected static String dburl;
     protected static String driver;
+    
+    protected static String sisO = System.getProperty("os.name").toLowerCase();
 
+    protected static ConnectionManager connect; // receives the connection
     // starts connection if not started
     public static ConnectionManager getInstance() {
         if (connect == null) {
@@ -30,9 +30,8 @@ public class ConnectionManager {
 
     // effectively starts connection
     public static Connection getConnection()
-            throws ClassNotFoundException, FileNotFoundException, SQLException, IOException {
-        Properties prop = new Properties(); // receives properties from .properties file
-        prop.load(new FileInputStream("/home/kuroneko/Dev/Java/netbeans/ClinicaMenteVida/prop.properties"));
+            throws ClassNotFoundException, SQLException, IOException {
+        Properties prop = getProperties();
 
         // assigning properties to variables
         user = prop.getProperty("user");
@@ -43,11 +42,38 @@ public class ConnectionManager {
         Class.forName(driver);
         return DriverManager.getConnection(dburl, user, password);
     }
+    
+    protected static Properties getProperties() throws FileNotFoundException, IOException {
+        Properties prop = new Properties();
+        FileInputStream fIS = null;
+        if (sisO.startsWith("win")) {
+            fIS = new FileInputStream("C:\\dev\\ETB\\MenteVidaMain\\ClinicaMenteVida\\prop.properties");
+        } else if (sisO.contains("linux")) {
+            fIS = new FileInputStream("/home/kuroneko/Dev/Java/netbeans/ClinicaMenteVida/prop.properties");
+        } else {
+            System.out.println("Sistema não suportado");
+            fIS = null;
+        }
+        prop.load(fIS);
+        return prop;
+    }
+    
+    public static String getUploads() throws IOException {
+        Properties prop = getProperties();
+        String dir = null;
+        if (sisO.startsWith("win")) {
+            dir = prop.getProperty("winuploads");
+        } else if (sisO.contains("linux")) {
+            dir = prop.getProperty("linuploads");
+        }
+        return dir;
+    }
 
     public static void main(String[] args)
             throws ClassNotFoundException, FileNotFoundException, SQLException, IOException {
         Connection con;
         con = ConnectionManager.getConnection();
         System.out.println(con);
+        System.out.println(System.getProperty("os.name"));
     }
 }

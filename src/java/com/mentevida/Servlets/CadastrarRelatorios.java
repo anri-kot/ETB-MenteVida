@@ -1,5 +1,6 @@
 package com.mentevida.Servlets;
 
+import com.mentevida.dao.ConnectionManager;
 import com.mentevida.dao.RelatorioDAO;
 import com.mentevida.nucleo.Consulta;
 import com.mentevida.nucleo.Relatorio;
@@ -41,12 +42,13 @@ public class CadastrarRelatorios extends HttpServlet {
             oRelatorio.setIdRelatorio(dao.mostrarTodasRelatorios().getLast().getIdRelatorio());
             
             Part filePart = request.getPart("arquivo");
-            String caminhoDir = "/home/kuroneko/Dev/Uploads" + "/Relatorios/relatorio" + oRelatorio.getIdRelatorio() + "consulta" + consulta.getIdConsulta();
+            String diretorio = "/Relatorios/relatorio" + oRelatorio.getIdRelatorio() + "consulta" + consulta.getIdConsulta();
+            String diretorioReal = ConnectionManager.getUploads() + diretorio;
             for (Part part : request.getParts()) {
-                part.write(caminhoDir);
+                part.write(diretorioReal);
             }
             
-            oRelatorio.setEndereco(caminhoDir);
+            oRelatorio.setEndereco(diretorio);
             dao.alterarRelatorio(oRelatorio);
             
             PrintWriter out = response.getWriter();

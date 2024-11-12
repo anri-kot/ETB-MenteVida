@@ -1,5 +1,6 @@
 package com.mentevida.Servlets;
 
+import com.mentevida.dao.ConnectionManager;
 import com.mentevida.dao.PacienteDAO;
 import com.mentevida.nucleo.Paciente;
 import java.io.IOException;
@@ -37,14 +38,15 @@ public class CadastrarPaciente extends HttpServlet {
             
             // upload do arquivo
             paciente = dao.selectAllPacientes().getLast();
-            String caminhoDir = "/home/kuroneko/Dev/Uploads/Pacientes/" + "historico" + paciente.getIdPaciente();
+            String diretorio = "/Pacientes/" + "historico" + paciente.getIdPaciente() + paciente.getNome().replaceAll("\\s", "");
+            String diretorioReal = ConnectionManager.getUploads() + diretorio;
             
             for (Part part : request.getParts()) {
-                part.write(caminhoDir);
+                part.write(diretorioReal);
             }
             
             // atualizar paciente com endereço do upload
-            paciente.setHistoricoMedico(caminhoDir);
+            paciente.setHistoricoMedico(diretorio);
             dao.updatePaciente(paciente);
             
             PrintWriter pw = response.getWriter();
