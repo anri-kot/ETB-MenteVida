@@ -39,8 +39,6 @@ public class CadastrarPaciente extends HttpServlet {
             paciente = dao.selectAllPacientes().getLast();
             String caminhoDir = "/home/kuroneko/Dev/Uploads/Pacientes/" + "historico" + paciente.getIdPaciente();
             
-            Part filePart = request.getPart("historico_medico");
-            String fileName = filePart.getSubmittedFileName();
             for (Part part : request.getParts()) {
                 part.write(caminhoDir);
             }

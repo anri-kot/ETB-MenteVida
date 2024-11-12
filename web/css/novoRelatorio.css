@@ -79,7 +79,7 @@ form#form-relatorio label {
 }
 
 form#form-relatorio input[type="text"],
-form#form-relatorio input[type="datetime-local"],
+form#form-relatorio input[type="date"],
 form#form-relatorio input[type="file"] {
     width: 100%;
     padding: 10px;
