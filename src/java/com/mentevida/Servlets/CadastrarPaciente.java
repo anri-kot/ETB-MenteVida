@@ -29,6 +29,10 @@ public class CadastrarPaciente extends HttpServlet {
         String data_nascimento = request.getParameter("data_nascimento");
         String telefone = request.getParameter("telefone");
         String email = request.getParameter("email");
+        boolean alterar = false;
+        if (request.getParameter("alterar") != null) {
+            alterar = true;
+        }
         
         Paciente paciente = new Paciente(0, nome, LocalDate.parse(data_nascimento), telefone, email, "");
         try {

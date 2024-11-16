@@ -18,15 +18,20 @@
                     if (!user[2].equals(_password)) {
                         out.print("Senha incorreta.");
                         out.print("<a href='index.html'>Voltar</a>");
-                        session.setAttribute("usuarioLoggado", false);
+                        session.setAttribute("login", false);
                     } else {
-                        session.setAttribute("usuarioLogado", true);
+                        session.setAttribute("login", true);
+                        if (Boolean.parseBoolean(user[3])) {
+                            session.setAttribute("admin", true);
+                        } else {
+                            session.setAttribute("admin", false);
+                        }
                         response.sendRedirect("home.jsp");
                     }
             } catch (Exception ignore) {
                 out.print("Usuário inválido.<br>");
                 out.print("<a href='index.html'>Voltar</a>");
-                session.setAttribute("usuarioLoggado", false);
+                session.setAttribute("login", false);
             }
 
         %>

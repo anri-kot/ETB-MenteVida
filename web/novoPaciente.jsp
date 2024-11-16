@@ -10,25 +10,6 @@
     <link rel="stylesheet" href="css/novoPaciente.css">
 </head>
 <body>
-    <header class="topo">
-        <img src="img/psc.png" alt="Logo da Clínica" class="clinica-imagem">
-        <h1>Clínica Mente e Vida</h1>
-        <p>SaÃºde Mental e Bem-Estar</p>
-
-        <div class="menu">
-            <nav class="navbar">
-                <ul>
-                    <li><a href="home.jsp" >Início</a></li>
-                    <li><a href="paciente.jsp" >Pacientes</a></li>
-                    <li><a href="agendamento.jsp">Agendamentos</a></li>
-                    <li><a href="prescricao.jsp">Prescrições</a></li>
-                    <li><a href="relatorio.jsp">Relatórios</a></li>
-                    <li><a href="perfil.jsp">Perfil</a></li>
-                </ul>
-            </nav>
-        </div> 
-    </header>
-
     <main>
 <h2>Novo Paciente</h2>
         <!-- Formulário para Cadastro de Novo Paciente -->
@@ -51,10 +32,5 @@
         
             <input type="submit" value="Cadastrar Paciente">
         </form>
-        
-
-    <footer class="rodape">
-        <p>&copy; 2024 Clínica Mente & Vida - Todos os direitos reservados</p>
-    </footer>
 </body>
 </html>

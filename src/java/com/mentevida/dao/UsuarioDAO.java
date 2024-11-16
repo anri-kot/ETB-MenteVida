@@ -73,7 +73,7 @@ public class UsuarioDAO {
                 String[] tempUsuario = {idUsuario, username, senha, admin};
                 list.add(tempUsuario);
             }
-            
+            // Usuario -> {idUsuario, username, senha, admin}
             return list;
         } finally {
             if (st != null) {
@@ -93,6 +93,8 @@ public class UsuarioDAO {
             st.setString(1, input);
             rs = st.executeQuery();
             
+            // Usuario -> {idUsuario, username, senha, admin}
+
             String idUsuario;
             String username;
             String senha;

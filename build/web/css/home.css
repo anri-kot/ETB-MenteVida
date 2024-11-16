@@ -1,8 +1,16 @@
+* {
+    text-decoration: none;
+}
+
 body {
     font-family: Arial, sans-serif;
     background: linear-gradient(to bottom right, #f0f4f8, #d9e8e6); /* Gradiente suave em tons pastéis */
     margin: 0;
     padding: 0;
+}
+
+section {
+    height: 80vh;
 }
 
 .topo {
@@ -38,18 +46,18 @@ body {
     margin-right: 15px;
 }
 
-.navbar ul li a {
+.navbar ul li {
     text-decoration: none;
     font-weight: bold;
 }
 
-.navbar ul li a.active {
+.navbar ul li:active {
     color: #0044cc; /* Cor para o link ativo */
     font-weight: bold;
     border-bottom: 2px solid #0044cc; /* Linha inferior para destaque */
 }
 
-.navbar ul li a:hover {
+.navbar ul li:hover {
     background-color: rgb(211, 253, 253);
     transition: cubic-bezier(0.075, 0.82, 0.165, 1);
     font-size: larger;
@@ -92,20 +100,17 @@ body {
 .navbar ul li {
     display: inline;
     margin-right: 15px;
-}
-
-.navbar ul li a {
     text-decoration: none;
     font-weight: bold;
 }
 
-.navbar ul li a.active {
+.navbar ul li:active {
     color: #0044cc; /* Cor para o link ativo */
     font-weight: bold;
     border-bottom: 2px solid #0044cc; /* Linha inferior para destaque */
 }
 
-.navbar ul li a:hover {
+.navbar ul li:hover {
     background-color: rgb(211, 253, 253);
     transition: cubic-bezier(0.075, 0.82, 0.165, 1);
     font-size: larger;
@@ -123,3 +128,8 @@ body {
     z-index: 10; /* Garante que o rodapé fique sobre outros elementos */
 }
 
+iframe {
+    border: none;
+    width: 100%;
+    height: 100%;
+}
