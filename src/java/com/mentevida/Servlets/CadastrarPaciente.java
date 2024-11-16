@@ -42,7 +42,7 @@ public class CadastrarPaciente extends HttpServlet {
             
             // upload do arquivo
             paciente = dao.selectAllPacientes().getLast();
-            String diretorio = "/Pacientes/" + "historico" + paciente.getIdPaciente() + paciente.getNome().replaceAll("\\s", "");
+            String diretorio = "/Pacientes/" + "historico" + paciente.getIdPaciente() + paciente.getNome().replaceAll("\\s", "") + ".pdf";
             String diretorioReal = ConnectionManager.getUploads() + diretorio;
             
             for (Part part : request.getParts()) {

@@ -42,7 +42,7 @@ public class CadastrarRelatorios extends HttpServlet {
             oRelatorio.setIdRelatorio(dao.mostrarTodasRelatorios().getLast().getIdRelatorio());
             
             Part filePart = request.getPart("arquivo");
-            String diretorio = "/Relatorios/relatorio" + oRelatorio.getIdRelatorio() + "consulta" + consulta.getIdConsulta();
+            String diretorio = "/Relatorios/relatorio" + oRelatorio.getIdRelatorio() + "consulta" + consulta.getIdConsulta() + ".pdf";
             String diretorioReal = ConnectionManager.getUploads() + diretorio;
             for (Part part : request.getParts()) {
                 part.write(diretorioReal);
