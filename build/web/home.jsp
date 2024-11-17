@@ -15,7 +15,10 @@
                 response.sendRedirect("index.html");
             }
 
-            Boolean admin = (Boolean) session.getAttribute("admin");
+            Boolean admin = false;
+            if (session.getAttribute("admin") != null && (Boolean) session.getAttribute("admin")) {
+                admin = true;
+            }
         %>
         <header class="topo">
             <img src="img/psc.png" alt="Logo da Clínica" class="clinica-imagem">
@@ -28,7 +31,7 @@
             <div class="menu">       
                 <nav class="navbar">
                     <ul>
-                        <li onclick="redireciona('home.jsp')">Início</li>
+                        <li onclick="location = 'home.jsp'">Início</li>
                         <li onclick="redireciona('paciente.jsp')">Pacientes</li>
                         <li onclick="redireciona('paciente.jsp')">Agendamentos</li>
                         <li onclick="redireciona('paciente.jsp')">Prescrições</li>

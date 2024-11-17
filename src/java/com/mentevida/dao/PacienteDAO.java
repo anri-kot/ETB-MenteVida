@@ -22,7 +22,7 @@ public class PacienteDAO {
     
     // Select
     
-    public List<Paciente> selectAllPacientes() throws SQLException {
+    public List<Paciente> mostrarTodosPacientes() throws SQLException {
         List<Paciente> list = new ArrayList<>();
         
         PreparedStatement st = null;
@@ -43,7 +43,7 @@ public class PacienteDAO {
         }
     }
     
-    public List<Paciente> selectIdPacientes(int id) throws SQLException {
+    public List<Paciente> mostrarIdPacientes(int id) throws SQLException {
         List<Paciente> list = new ArrayList<>();
         
         PreparedStatement st = null;
@@ -65,7 +65,7 @@ public class PacienteDAO {
         }
     }
     
-    public List<Paciente> selectNomePacientes(String nome) throws SQLException {
+    public List<Paciente> mostrarNomePacientes(String nome) throws SQLException {
         List<Paciente> list = new ArrayList<>();
         
         PreparedStatement st = null;
@@ -89,7 +89,7 @@ public class PacienteDAO {
     
     // Add - Update - Remove
     
-    public void addPaciente(Paciente oPaciente) throws SQLException {
+    public void cadastrarPaciente(Paciente oPaciente) throws SQLException {
         PreparedStatement st = null;
         try {
             st = con.prepareStatement("insert into paciente (nome, data_nascimento, telefone, email, historico_medico) values (?, ?, ?, ?, ?)");
@@ -107,7 +107,7 @@ public class PacienteDAO {
         }
     }
     
-    public void updatePaciente(Paciente oPaciente) throws SQLException {
+    public void alterarPaciente(Paciente oPaciente) throws SQLException {
         PreparedStatement st = null;
         try {
             st = con.prepareStatement("update paciente set nome = ?, data_nascimento = ?, telefone = ?, email = ?, historico_medico = ? " +
@@ -127,7 +127,7 @@ public class PacienteDAO {
         }
     }
     
-    public void deletePaciente(int id) throws SQLException {
+    public void deletarPaciente(int id) throws SQLException {
         PreparedStatement st = null;
         try {
             st = con.prepareStatement("delete from paciente where id_paciente = ?");
