@@ -39,7 +39,9 @@ public class ControlePaciente extends HttpServlet {
             } catch (Exception e) {
                 response.getWriter().print("Erro: " + e);
             }
+            return;
         }
+        
         String nome = request.getParameter("nome");
         String data_nascimento = request.getParameter("data_nascimento");
         String telefone = request.getParameter("telefone");

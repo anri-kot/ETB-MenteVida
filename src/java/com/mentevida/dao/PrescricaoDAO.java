@@ -22,7 +22,7 @@ public class PrescricaoDAO {
     
     // Select
     
-    public List<Prescricao> mostrarTodasPrescricaos() throws Exception {
+    public List<Prescricao> mostrarTodasPrescricoes() throws Exception {
         List<Prescricao> list = new ArrayList<>();
         
         PreparedStatement st = null;
@@ -96,7 +96,7 @@ public class PrescricaoDAO {
     public void alterarPrescricao(Prescricao aPrescricao) throws Exception {
         PreparedStatement st = null;
         try {
-            st = con.prepareStatement("update prescricao set data_prescricao = ?, medicamentos = ?, dosagem = ?, comentario = ?, id_consulta = ? where id_prescricao = ?");
+            st = con.prepareStatement("UPDATE `prescricao` SET `data_prescricao` = ?, `medicamentos` = ?, `dosagem` = ?, `comentario` = ?, `id_consulta` = ? WHERE `prescricao`.`id_prescricao` = ?");
             st.setString(1, aPrescricao.getDataPrescricao().toString());
             st.setString(2, aPrescricao.getMedicamentos());
             st.setString(3, aPrescricao.getDosagem());
@@ -137,17 +137,4 @@ public class PrescricaoDAO {
         
         return new Prescricao(idPrescricao, dataPrescricao, medicamentos, dosagem, comentario, consulta);
     }
-    
-    public static void main(String[] args) throws Exception {
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        Consulta c = new Consulta();
-        c.setIdConsulta(2);
-        LocalDate data = LocalDate.parse("2024-07-26", dtf);
-        Prescricao aPrescricao = new Prescricao(1, data, "medicamento 20, medicamento 60, medicamento 14", "dosagem ajdsk e skads", "skdjskdjskTeSTE", c);
-        
-        PrescricaoDAO dao = new PrescricaoDAO();
-        
-        System.out.println(dao.mostrarIdPrescricao(2));
-    }
-
 }

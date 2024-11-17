@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AgendamentoDAO {
-    final DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'hh:mm");
+    final DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
     private final Connection con;
     
     public AgendamentoDAO() throws Exception{
@@ -142,5 +142,10 @@ public class AgendamentoDAO {
         funcionario.setIdFuncionario(rs.getInt("funcionario_id_funcionario"));
         
         return new Agendamento(idAgendamento, dataAgendamento, status, funcionario, medico, paciente);
+    }
+    
+    public static void main(String[] args) throws Exception {
+        AgendamentoDAO dao = new AgendamentoDAO();
+        System.out.println(dao.mostrarTodosAgendamentos());
     }
 }

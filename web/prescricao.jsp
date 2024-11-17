@@ -1,64 +1,106 @@
+<%@page import="java.time.format.DateTimeFormatter"%>
+<%@page import="com.mentevida.nucleo.Prescricao"%>
+<%@page import="java.util.List"%>
+<%@page import="com.mentevida.dao.PrescricaoDAO"%>
+<%@page import="java.time.LocalDate"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="A Clínica Mente & Vida oferece serviços especializados para o diagnóstico e tratamento de transtornos mentais.">
-    <title>Prescrição</title>
-    <link rel="stylesheet" href="css/prescricao.css">
-    
-</head>
-<body>
-    <header class="topo">
-        <img src="img/psc.png" alt="Descrição da imagem" class="clinica-imagem">
-        <div>
-            <h1>Clínica Mente & Vida</h1>
-            <p>Saúde Mental e Bem-Estar</p>
-        </div>
-        <div class="menu">
-            <nav class="navbar">
-                <ul>
-                    <li><a href="home.jsp">Home</a></li>
-                    <li><a href="paciente.jsp">Pacientes</a></li>
-                    <li><a href="agendamento.jsp">Agendamentos</a></li>
-                    <li><a href="prescricao.jsp">Prescrições</a></li>
-                    <li><a href="relatorio.jsp">Relatórios</a></li>
-                    <li><a href="perfil.jsp">Perfil</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Gerenciamento de Relatórios da Clínica Mente & Vida.">
+        <title>Prescrições - Clínica Mente & Vida</title>
+        <link rel="stylesheet" href="css/relatorio.css">
+    </head>
+    <body>
 
-    <h2>Cadastrar Prescrições</h2>  
+        <%
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM-dd-YYYY");
 
-    <form id="form-prescricao" action="CadastrarPrescricao" method="POST">
-        <label for="consulta">Consulta:</label>
-        <input type="number" id="consulta" name="consulta" placeholder="Entre com o id da consulta" required></input>
-        
-        <label for="data_prescricao">Data da Prescrição:</label>
-        <input type="date" id="data_prescricao" name="data_prescricao" required>
+            int idPrescricao = 0;
+            LocalDate data = null;
+            String medicamentos = "";
+            String dosagem = "";
+            String instrucoes = "";
+            int idConsulta = 0;
+        %>
 
-        <label for="medicamentos">Medicamento:</label>
-        <input type="text" id="medicamentos" name="medicamentos" maxlength="200" placeholder="Entre com o medicamento" required>
+        <main>
+            <h2>Prescrições Registradas</h2>
 
-        <label for="dosagem">Dosagem:</label>
-        <input type="text" id="dosagem" name="dosagem" maxlength="200" placeholder="Entre com a dosagem" required>
 
-        <label for="comentario">Instruções:</label>
-        <textarea id="comentario" name="comentario" maxlength="500" rows="8" placeholder="Comentário"></textarea>
-        
-        <button type="submit" class="btn">Efetuar Registro</button>
-    </form>
+            <table width="100%" border="1">
+                <tr>
+                    <th>ID</th>
+                    <th>Data<br>(mês/dia/ano)</th>
+                    <th>Medicamentos</th>
+                    <th>Dosagem</th>
+                    <th>Instruções</th>
+                    <th>ID Consulta</th>
+                    <th>Ações</th>
+                </tr>
+                <%
+                    PrescricaoDAO dao = new PrescricaoDAO();
+                    List<Prescricao> prescricoes = dao.mostrarTodasPrescricoes();
+                    Prescricao prescricao = null;
+                    int i = 0;
+                    while (i < prescricoes.size()) {
+                        prescricao = prescricoes.get(i);
 
-    <div class="container">
-        <a href="home.jsp" class="botoes" >Home</a>
-        <a href="relatorio.jsp" class="botoes" >Voltar</a>
-    </div>
+                        idPrescricao = prescricao.getIdPrescricao();
+                        data = prescricao.getDataPrescricao();
+                        medicamentos = prescricao.getMedicamentos();
+                        dosagem = prescricao.getDosagem();
+                        instrucoes = prescricao.getComentario();
+                        idConsulta = prescricao.getConsulta().getIdConsulta();
+                %>
+                <tr>
+                    <td>
+                        <%=idPrescricao%>
+                    </td>
+                    <td>
+                        <%=data.format(dtf)%>
+                    </td>
+                    <td>
+                        <%=medicamentos%>
+                    </td>
+                    <td>
+                        <%=dosagem%>
+                    </td>
+                    <td>
+                        <%=instrucoes%>
+                    </td>
+                    <td>
+                        <%=idConsulta%>
+                    </td>
+                    <td>
+                        <form class="botoesAcao" action="gerenciaPrescricao.jsp" method="POST">
+                            <button>
+                                Editar
+                            </button>
+                            <input type="hidden" name="idPrescricao" value="<%=idPrescricao%>">
+                        </form>
 
-    <footer class="rodape">
-        <p>&copy; 2024 Clínica Mente & Vida - Todos os direitos reservados</p>
-    </footer>
-</body>
+                        <form class="botoesAcao" action="ConstrolePrescricao" method="POST" onsubmit="return confirm('Você tem certeza de que quer excluir a prescrição <%=idPrescricao%>?');">
+                            <input type="hidden" name="idPrescricao" value="<%=idPrescricao%>">
+                            <input type="hidden" name="excluir" value="true">
+                            <button>
+                                Excluir
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+                <%
+                        i++;
+                    }
+                %>
+
+            </table>
+            <!-- Botão para adicionar um novo relatório, agora abaixo da tabela -->
+            <p><a href="gerenciaPrescricao.jsp" class="novo-relatorio">Nova Prescrição</a></p>
+        </main>
+
+    </body>
 </html>
