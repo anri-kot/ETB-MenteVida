@@ -43,7 +43,7 @@
             MedicoDAO medDAO = new MedicoDAO();
             FuncionarioDAO funDAO = new FuncionarioDAO();
             List<Medico> medico = medDAO.mostrarTodosMedicos();
-            List<Funcionario> funcionario = funDAO.mostrarTodasFuncionarios();
+            List<Funcionario> funcionario = funDAO.mostrarTodosFuncionarios();
 
             int i = 0;
             int j = 0;

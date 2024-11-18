@@ -38,6 +38,7 @@
                         <li onclick="redireciona('medico.jsp')">Médicos</li>
                         <li onclick="redireciona('funcionario.jsp')">Funcionários</li>
                         <li onclick="redireciona('agendamento.jsp')">Agendamentos</li>
+                        <li onclick="redireciona('consulta.jsp')">Consultas</li>
                         <li onclick="redireciona('prescricao.jsp')">Prescrições</li>
                         <li onclick="redireciona('relatorio.jsp')">Relatórios</li>
                             <% if (admin) {
