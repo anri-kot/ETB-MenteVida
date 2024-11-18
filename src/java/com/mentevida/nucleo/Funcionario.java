@@ -26,6 +26,7 @@ public class Funcionario extends Usuario {
                 "telefone=" + getTelefone() +
                 "email=" + getEmail() +
                 "cargo=" + getCargo() +
+                "idUsuario=" + getIdUsuario() +
                 "]";
     }
 

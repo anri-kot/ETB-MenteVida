@@ -71,7 +71,6 @@
             <script>
                 const formulario = document.getElementsByTagName("form")[0];
                 const mostrarHist = document.getElementById("mostrarHist");
-                const atualizaHist = document.getElementById("atualizaHist");
                 let clicou = false;
                 
                 function mostrarCampoArquivo() {
@@ -95,13 +94,11 @@
                         formulario.insertBefore(historicoArquivo, submitBtn);
                         mostrarHist.textContent = "Não atualizar o histórico";
                         clicou = true;
-                        atualizaHist.value = "true";
                     } else {
                         document.getElementById("historicoArquivo").remove();
                         document.getElementById("historicoLabel").remove();
                         mostrarHist.textContent = "Inserir novo histórico";
                         clicou = false;
-                        atualizaHist.value = "false";
                     }
                 }
             </script>

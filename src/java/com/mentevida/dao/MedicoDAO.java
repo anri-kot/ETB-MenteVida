@@ -64,6 +64,28 @@ public class MedicoDAO {
         }
     }
     
+    public List<Medico> mostrarUserIdMedicos(int id) throws Exception {
+        List<Medico> list = new ArrayList<>();
+        
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        try {
+            st = con.prepareStatement("select * from medico where idUsuario = ?");
+            st.setInt(1, id);
+            rs = st.executeQuery();
+            
+            // loop adiciona o objeto Medico numa lista
+            while (rs.next()) {
+                Medico tempMedico = rowToMedico(rs);
+                list.add(tempMedico);
+            }
+            return list;
+            
+        } finally {
+            close(st, rs);
+        }
+    }
+    
     public List<Medico> mostrarNomeMedicos(String nome) throws Exception {
         List<Medico> list = new ArrayList<>();
         
@@ -127,6 +149,7 @@ public class MedicoDAO {
             st.setString(2, oMedico.getEspecialidade());
             st.setString(3, oMedico.getTelefone());
             st.setString(4, oMedico.getEmail());
+            st.setInt(5, oMedico.getIdMedico());
             
             st.executeUpdate();
         } finally {

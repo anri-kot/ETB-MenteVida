@@ -83,7 +83,7 @@
                             <input type="hidden" name="idPrescricao" value="<%=idPrescricao%>">
                         </form>
 
-                        <form class="botoesAcao" action="ConstrolePrescricao" method="POST" onsubmit="return confirm('Você tem certeza de que quer excluir a prescrição <%=idPrescricao%>?');">
+                        <form class="botoesAcao" action="ControlePrescricao" method="POST" onsubmit="return confirm('Você tem certeza de que quer excluir a prescrição <%=idPrescricao%>?');">
                             <input type="hidden" name="idPrescricao" value="<%=idPrescricao%>">
                             <input type="hidden" name="excluir" value="true">
                             <button>

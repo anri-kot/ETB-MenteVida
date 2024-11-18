@@ -11,13 +11,15 @@
     </head>
     <body>
         <%
-            if (session.getAttribute("login") == null || !(Boolean) session.getAttribute("login")) {
-                response.sendRedirect("index.html");
-            }
-
-            Boolean admin = false;
-            if (session.getAttribute("admin") != null && (Boolean) session.getAttribute("admin")) {
-                admin = true;
+            int idUser = -1;
+            int cargo = -1;
+            boolean admin = false;
+            if (session.getAttribute("user") == null || session.getAttribute("cargo") == null || session.getAttribute("admin") == null) {
+                response.sendRedirect("index.jsp");
+            } else {
+                idUser = (int) session.getAttribute("user");
+                cargo = (int) session.getAttribute("cargo");
+                admin = (boolean) session.getAttribute("admin");
             }
         %>
         <header class="topo">
@@ -37,9 +39,9 @@
                         <li onclick="redireciona('prescricao.jsp')">Prescrições</li>
                         <li onclick="redireciona('relatorio.jsp')">Relatórios</li>
                             <% if (admin) {
-                            out.print("<li onclick=\"redireciona('paciente.jsp')\">Usuarios<li>");
+                            out.print("<li onclick=\"redireciona('usuario.jsp')\">Usuarios<li>");
                         }%>
-                        <li onclick="redireciona('paciente.jsp')">Perfil</li>
+                        <li onclick="redireciona('perfil.jsp')">Perfil</li>
                     </ul>
                 </nav>
             </div>      

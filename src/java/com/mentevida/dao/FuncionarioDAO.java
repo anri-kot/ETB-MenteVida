@@ -73,6 +73,33 @@ public class FuncionarioDAO {
         }
     }
     
+    public List<Funcionario> mostrarUserIdFuncionario(int id) throws Exception {
+        List<Funcionario> list = new ArrayList<>();
+        
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        try {
+            st = con.prepareStatement("select * from funcionario where idUsuario = ?");
+            st.setInt(1, id);
+            rs = st.executeQuery();
+            
+            // loop adiciona o objeto FuncionarioDAO numa lista
+            while (rs.next()) {
+                Funcionario tempFuncionario = rowToFuncionario(rs);
+                list.add(tempFuncionario);
+            }
+            return list;
+            
+        } finally {
+            if (st != null) {
+                st.close();
+            }
+            if (rs != null) {
+                rs.close();
+            }
+        }
+    }
+    
     public void cadastrarFuncionario(Funcionario oFuncionario) throws Exception {
         PreparedStatement st = null;
         try {
@@ -148,5 +175,10 @@ public class FuncionarioDAO {
         String cargo = rs.getString("cargo");
         
         return new Funcionario(idFuncionario, nome, telefone, email, cargo, idUsuario, username, senha, admin);
+    }
+    
+    public static void main(String[] args) throws Exception {
+        FuncionarioDAO dao = new FuncionarioDAO();
+        System.out.println(dao.mostrarUserIdFuncionario(10));
     }
 }

@@ -20,24 +20,14 @@ public class ControlePrescricao extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        PrintWriter out = response.getWriter();
+        
         int idPrescricao = 0;
         
         if (request.getParameter("idPrescricao") != null) {
             idPrescricao = Integer.parseInt(request.getParameter("idPrescricao"));
         }
-        
-        LocalDate dataPrescricao = LocalDate.parse(request.getParameter("data_prescricao"), dtf);
-        String medicamentos = request.getParameter("medicamentos");
-        String dosagem = request.getParameter("dosagem");
-        String comentario = request.getParameter("comentario");
-        int idConsulta = Integer.parseInt(request.getParameter("consulta"));
-        
-        boolean alterar = false;
-        if (request.getParameter("alterar") != null && request.getParameter("alterar").equals("true")) {
-            alterar = true;
-        }
-        
-        PrintWriter out = response.getWriter();
         
         if (request.getParameter("excluir") != null && request.getParameter("excluir").equals("true")) {
             try {
@@ -50,9 +40,20 @@ public class ControlePrescricao extends HttpServlet {
                 out.println("location='prescricao.jsp'");
                 out.println("</script>");
             } catch (Exception e) {
-                out.print(e.getMessage());
+                out.print(e);
             }
             return;
+        }
+        
+        LocalDate dataPrescricao = LocalDate.parse(request.getParameter("data_prescricao"), dtf);
+        String medicamentos = request.getParameter("medicamentos");
+        String dosagem = request.getParameter("dosagem");
+        String comentario = request.getParameter("comentario");
+        int idConsulta = Integer.parseInt(request.getParameter("consulta"));
+        
+        boolean alterar = false;
+        if (request.getParameter("alterar") != null && request.getParameter("alterar").equals("true")) {
+            alterar = true;
         }
         
         try {
