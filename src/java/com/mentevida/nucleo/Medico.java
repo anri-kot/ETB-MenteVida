@@ -21,11 +21,12 @@ public class Medico extends Usuario {
     
     @Override
     public String toString() {
-        return "[idFuncionario=" + getIdUsuario() +
+        return "[idFuncionario=" + getIdMedico() +
                 "nome=" + getNome() +
                 "telefone=" + getTelefone() +
                 "email=" + getEmail() +
                 "especialidade=" + getEspecialidade() +
+                "usuario=" + getIdUsuario() +
                 "]";
     }
 

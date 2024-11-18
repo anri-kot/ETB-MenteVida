@@ -20,7 +20,7 @@ public class Funcionario extends Usuario {
     
     @Override
     public String toString() {
-        return "[idFuncionario=" + getIdUsuario() +
+        return "[idFuncionario=" + getIdFuncionario() +
                 "nome=" + getNome() +
                 "senha=" + getSenha() +
                 "telefone=" + getTelefone() +

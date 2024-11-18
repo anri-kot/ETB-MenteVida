@@ -31,6 +31,7 @@
                     <th>Admin</th>
                     <th>Nome</th>
                     <th>Cargo</th>
+                    <th>ID</th>
                     <th>Ações</th>
                 </tr>
                 <%
@@ -72,6 +73,9 @@
                     </td>
                     <td>
                         <%= admin %>
+                    </td>
+                    <td>
+                        <%= nome %>
                     </td>
                     <td>
                         <%= cargo %>

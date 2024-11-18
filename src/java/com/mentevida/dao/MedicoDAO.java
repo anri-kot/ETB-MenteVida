@@ -113,15 +113,20 @@ public class MedicoDAO {
     public void cadastrarMedico(Medico oMedico) throws Exception, NoSuchAlgorithmException {
         PreparedStatement st = null;
         try {
-            // Caso queira criar um novo usuário justo ao perfil do médico
-            if (oMedico.getIdUsuario() <= 0) {
+            /*
+            // Caso queira criar um novo usuário junto ao perfil do médico
+            if (oMedico.getIdUsuario() == -1) {
                 // Gerar usuário do médico
                 String username = oMedico.getUsername();
                 String senha = oMedico.getSenha();
                 String admin = Boolean.toString(oMedico.isAdmin());
                 String[] usuario = {"", username, senha, admin}; // [idUsuario, username, senha, admin] -- admin = "true" / "false"
                 usu.cadastrarUsuario(usuario);
+                
+                usuario = usu.mostrarUsernameUsuarios(username).get(0);
+                oMedico.setIdMedico(Integer.parseInt(usuario[0]));
             }
+            */
             
             st = con.prepareStatement("insert into medico (nome, especialidade, telefone, email, idUsuario) values (?, ?, ?, ?, ?)"); 
             
@@ -129,7 +134,11 @@ public class MedicoDAO {
             st.setString(2, oMedico.getEspecialidade());
             st.setString(3, oMedico.getTelefone());
             st.setString(4, oMedico.getEmail());
-            st.setInt(5, oMedico.getIdUsuario());
+            if (oMedico.getIdUsuario() != 0) {
+                st.setInt(5, oMedico.getIdUsuario());
+            } else {
+                st.setNull(5, 0);
+            }
             
             st.executeUpdate();
             
@@ -143,13 +152,18 @@ public class MedicoDAO {
     public void alterarMedico(Medico oMedico) throws Exception {
         PreparedStatement st = null;
         try {
-            st = con.prepareStatement("update medico set nome = ?, especialidade = ?, telefone = ?, email = ?" +
-                    "where id_medico = ?");
+            st = con.prepareStatement("update medico set nome = ?, especialidade = ?, telefone = ?, email = ?, idUsuario = ?" +
+                    " where id_medico = ?");
             st.setString(1, oMedico.getNome());
             st.setString(2, oMedico.getEspecialidade());
             st.setString(3, oMedico.getTelefone());
             st.setString(4, oMedico.getEmail());
-            st.setInt(5, oMedico.getIdMedico());
+            if (oMedico.getIdUsuario() > 0) {
+                st.setInt(5, oMedico.getIdUsuario());
+            } else { 
+                st.setNull(5, 0);
+            }
+            st.setInt(6, oMedico.getIdMedico());
             
             st.executeUpdate();
         } finally {
@@ -174,12 +188,21 @@ public class MedicoDAO {
     }
 
     private Medico rowToMedico(ResultSet rs) throws Exception, Exception {
-        int idUsuario = rs.getInt("idUsuario");
         
-        String[] usuario = usu.mostrarIdUsuario(idUsuario).get(0); // [id, username, senha, admin]
-        String username = usuario[1];
-        String senha = usuario[2];
-        Boolean admin = Boolean.getBoolean(usuario[3]);
+        int idUsuario = 0;
+        String username = null;
+        String senha = null;
+        Boolean admin = false;
+        
+        if (rs.getString("idUsuario") != null) {
+            idUsuario = rs.getInt("idUsuario");
+            if (usu.mostrarIdUsuario(idUsuario).get(0) != null) {
+                String[] usuario = usu.mostrarIdUsuario(idUsuario).get(0); // [id, username, senha, admin]
+                username = usuario[1];
+                senha = usuario[2];
+                admin = Boolean.getBoolean(usuario[3]);
+            }
+        }
         
         int idMedico = rs.getInt("id_medico");
         String nome = rs.getString("nome");
@@ -197,5 +220,12 @@ public class MedicoDAO {
         if (rs != null) {
             rs.close();
         }
+    }
+    
+    public static void main(String[] args) throws Exception {
+        MedicoDAO dao = new MedicoDAO();
+        Medico medico = new Medico(0, "teste", "teste", "123456789", "teste", 0, "", "", false);
+
+        System.out.println(dao.mostrarTodosMedicos());
     }
 }
