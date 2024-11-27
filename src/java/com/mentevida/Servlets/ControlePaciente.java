@@ -75,7 +75,7 @@ public class ControlePaciente extends HttpServlet {
                 if (!alterar) {
                     paciente = dao.mostrarTodosPacientes().getLast();
                 }
-                String diretorio = "/Pacientes/" + "historico" + paciente.getIdPaciente() + paciente.getNome().replaceAll("\\s", "") + ".pdf";
+                String diretorio = ConnectionManager.getDiretorio("Pacientes") + "historico" + paciente.getIdPaciente() + paciente.getNome().replaceAll("\\s", "") + ".pdf";
                 String diretorioReal = ConnectionManager.getUploads() + diretorio;
 
                 for (Part part : request.getParts()) {

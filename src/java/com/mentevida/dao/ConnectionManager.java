@@ -46,9 +46,14 @@ public class ConnectionManager {
     protected static Properties getProperties() throws FileNotFoundException, IOException {
         Properties prop = new Properties();
         FileInputStream fIS = null;
+        
+        // Indique o diretório do arquivo propriedades no campo FileInputStream()
+        
         if (sisO.startsWith("win")) {
-            fIS = new FileInputStream("C:\\dev\\ETB\\MenteVidaMain\\ClinicaMenteVida\\prop.properties");
+            // Windows
+            fIS = new FileInputStream("C:\\dev\\ETB\\EU\\ClinicaMenteVida\\prop.properties");
         } else if (sisO.contains("linux")) {
+            // Linux
             fIS = new FileInputStream("/home/kuroneko/Dev/Java/netbeans/ClinicaMenteVida/prop.properties");
         } else {
             System.out.println("Sistema não suportado");
@@ -65,6 +70,16 @@ public class ConnectionManager {
             dir = prop.getProperty("winuploads");
         } else if (sisO.contains("linux")) {
             dir = prop.getProperty("linuploads");
+        }
+        return dir;
+    }
+    
+    public static String getDiretorio(String pasta) {
+        String dir = null;
+        if (sisO.startsWith("win")) {
+            dir = "\\" + pasta + "\\";
+        } else if (sisO.contains("linux")) {
+            dir = "/" + pasta +"/";
         }
         return dir;
     }

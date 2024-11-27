@@ -73,7 +73,7 @@ public class ControleRelatorio extends HttpServlet {
             }
             
             if (request.getPart("relatorio") != null) {
-                String diretorio = "/Relatorios/relatorio" + oRelatorio.getIdRelatorio() + "consulta" + consulta.getIdConsulta() + ".pdf";
+                String diretorio = ConnectionManager.getDiretorio("Relatorios") + "relatorio" + oRelatorio.getIdRelatorio() + "consulta" + consulta.getIdConsulta() + ".pdf";
                 String diretorioReal = ConnectionManager.getUploads() + diretorio;
                 for (Part part : request.getParts()) {
                     part.write(diretorioReal);
