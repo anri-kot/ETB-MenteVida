@@ -67,5 +67,9 @@
     properties which you can use check the target you are overriding in 
     nbproject/build-impl.xml file. 
 
-    -->
+	-->
+    <target name="-post-compile">
+        <echo message="Copying prop.properties to ${build.classes.dir}"/>
+        <copy file="${basedir}/prop.properties" todir="${build.classes.dir}" failonerror="false"/>
+    </target>		
 </project>

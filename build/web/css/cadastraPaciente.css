@@ -162,11 +162,11 @@ header.topo div p {
 .rodape {
     text-align: center;
     padding: 10px;
-    position: fixed; /* Fixa o rodapé na parte inferior */
+    position: relative; /* Fixa o rodapé na parte inferior */
     bottom: 0; /* Garantir que o rodapé fique na parte inferior da tela */
     left: 0; /* Ocupa toda a largura */
     width: 100%; /* Largura total da página */
     border-radius: 10px;
-    z-index: 10; /* Garante que o rodapé fique sobre outros elementos */
+   
 }
 

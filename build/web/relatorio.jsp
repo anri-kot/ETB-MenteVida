@@ -1,62 +1,110 @@
+<%@page import="java.time.format.DateTimeFormatter"%>
+<%@page import="java.util.List"%>
+<%@page import="com.mentevida.nucleo.Relatorio"%>
+<%@page import="java.time.LocalDate"%>
+<%@page import="com.mentevida.dao.RelatorioDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Gerenciamento de Relatórios da Clínica Mente & Vida.">
-    <title>Relatórios - Clínica Mente & Vida</title>
-    <link rel="stylesheet" href="css/relatorio.css">
-</head>
-<body>
-
-    <header class="topo">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="css/relatorio.css">
+    </head>
+    <body>
+         <header class="topo">
         <img src="img/psc.png" alt="Logo da Clínica" class="clinica-imagem">
-        <h1>Clínica Mente & Vida</h1>
-        <p>Saúde Mental e Bem-Estar</p>
+        <div>
+            <h1>Clínica Mente & Vida</h1>
+            <p>Saúde Mental e Bem-Estar</p>
+        </div>
         <nav class="menu">
-            <ul>
-                <li><a href="home.jsp">Home</a></li>
-                <li><a href="paciente.jsp">Pacientes</a></li>
-                <li><a href="agendamento.jsp">Agendamentos</a></li>
-                <li><a href="prescricao.jsp">Prescrições</a></li>
-                <li><a href="relatorio.jsp" class="active">Relatórios</a></li>
-                <li><a href="perfil.jsp">Perfil</a></li>
+            <ul class="nav-list">
+                <li onclick="location = 'home.jsp'">Início</li>
+                <li onclick="location = 'paciente.jsp'">Pacientes</li>
+                <li onclick="location = 'medico.jsp'">Médicos</li>
+                <li onclick="location = 'funcionario.jsp'">Funcionários</li>
+                <li onclick="location = 'agendamento.jsp'">Agendamentos</li>
+                <li onclick="location = 'consulta.jsp'">Consultas</li>
+                <li onclick="location = 'prescricao.jsp'">Prescrições</li>
+                <li onclick="location = 'relatorio.jsp'">Relatórios</li>
+                <li onclick="location = 'perfil.jsp'">Perfil</li>
             </ul>
         </nav>
     </header>
-
-    <main>
-        <h2>Relatórios Registrados</h2>
-
-       
-        <table width="100%" border="1">
-            <tr>
-                <th>Data</th>
-                <th>Endereço</th>
-                <th>Ações</th>
-            </tr>
-            <tr>
-
-                <td>Data</td> 
-                <td>Endereço</td>
-                <td>
-
-                    <button>Editar</button>
-                    <button>Visualizar</button>
-                    <button>Excluir</button>
-                </td>
-            </tr>
+        
+        <%
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM-dd-yyyy");
             
-        </table>
-        <!-- Botão para adicionar um novo relatório, agora abaixo da tabela -->
-        <p><a href="NovoRelatorio.jsp" class="novo-relatorio">Novo Relatório</a></p>
-    </main>
+            int idRelatorio = 0;
+            LocalDate dataRelatorio = null;
+            String endereco = "";
+            int idConsulta = 0;
+            
+            RelatorioDAO dao = new RelatorioDAO();
+            List<Relatorio> listaRelatorio = dao.mostrarTodasRelatorios();
+            Relatorio relatorio = null;
+        %>
 
-    <footer class="rodape">
-        <p>&copy; 2024 Clínica Mente & Vida - Todos os direitos reservados</p>
-    </footer>
+        <main>
+            <h2>Relatórios Registrados</h2>
 
-</body>
+            <table width="100%" border="1">
+                <tr>
+                    <th>ID</th>
+                    <th>Data<br>(mês/dia/ano)</th>
+                    <th>Endereço</th>
+                    <th>Consulta</th>
+                    <th>Ações</th>
+                </tr>
+                
+                <%
+                    for (int i = 0; i < listaRelatorio.size(); i++) {
+                        relatorio = listaRelatorio.get(i);
+                        idRelatorio = relatorio.getIdRelatorio();
+                        dataRelatorio = relatorio.getDataRelatorio();
+                        endereco = relatorio.getEndereco();
+                        idConsulta = relatorio.getConsulta().getIdConsulta();
+                        
+                        String linkRelatorio = endereco;
+                        
+                        linkRelatorio = linkRelatorio.replaceAll("\\$", "/");
+                %>
+                
+                <tr>
+                    <td>
+                        <%=idRelatorio%>
+                    </td>
+                    <td>
+                        <%=dataRelatorio.format(dtf)%>
+                    </td>
+                    <td>
+                        <a class="diretorios" href="/ClinicaMenteVida/pdf?file=<%=linkRelatorio%>" target="_blank"> <%= endereco %> </a>
+                    </td>
+                    <td>
+                        <%=idConsulta%>
+                    </td>
+                    <td>
+                        <form action="gerenciaRelatorio.jsp" method="POST">
+                            <button class="btn-editar">Editar</button>
+                            <input type="hidden" name="idRelatorio" value="<%=idRelatorio%>">
+                        </form>
+                        <form action="ControleRelatorio" method="POST">
+                            <button class="btn-excluir">Excluir</button>
+                            <input type="hidden" name="idRelatorio" value="<%=idRelatorio%>">
+                            <input type='hidden' name='excluir' value='true'>
+                        </form>
+                    </td>
+                </tr>
+                <%
+                    }
+                %>
+
+            </table>
+            <!-- Botão para adicionar um novo relatório, agora abaixo da tabela -->
+            <p><a href="gerenciaRelatorio.jsp" class="novo-relatorio">Novo Relatório</a></p>
+        </main>
+
+    </body>
 </html>
