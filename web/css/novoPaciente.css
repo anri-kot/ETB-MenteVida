@@ -16,39 +16,41 @@ body {
     color: #333;
 }
 
+header.topo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #d9e8e6;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
 .clinica-imagem {
     width: 80px;
     height: 80px;
     border-radius: 10px;
-    margin-right: 15px; /* Espaço entre a imagem e o texto */
 }
 
 .menu {
-    margin-left: auto; /* Alinha o menu à direita */
+    margin-left: auto;
 }
 
-.menu ul {
+.nav-list {
     list-style: none;
+    display: flex;
+    gap: 15px;
     padding: 0;
-    text-align: right; /* Alinha os links para a direita */
+    margin: 0;
 }
 
-.menu ul li {
-    display: inline;
-    margin-right: 15px;
-}
-
-.menu ul li a {
-    text-decoration: none;
+.nav-list li {
+    cursor: pointer;
     font-weight: bold;
+    transition: color 0.3s;
 }
 
-.menu ul li a:hover {
-    color: #0044cc; /* Altera a cor ao passar o mouse */
-}
-
-main {
-    padding: 20px;
+.nav-list li:hover {
+    color: #0044cc;
 }
 
 h2 {
@@ -75,6 +77,8 @@ input[type="text"],
 input[type="date"],
 input[type="tel"],
 input[type="email"],
+input[type="number"],
+input[type="password"],
 textarea {
     width: calc(100% - 20px); /* Garante que o campo ocupe toda a largura menos o padding */
     padding: 10px;
@@ -86,7 +90,8 @@ textarea {
     box-sizing: border-box; /* Garante que padding não afete a largura total */
 }
 
-input[type="submit"] {
+input[type="submit"],
+button {
     background-color: #0044cc;
     color: white;
     padding: 10px 20px;
@@ -123,18 +128,25 @@ input[type="submit"]:hover {
     background-color: #003399; /* Cor ao passar o mouse */
 }
 
+#mudar-senha {
+    margin-bottom: 20px;
+}
 
+#mudar-senha-conteiner {
+    display: flex;
+    justify-content: center;
+}
 
 
 /* Rodapé */
 .rodape {
     text-align: center;
     padding: 10px;
-    position: fixed; /* Fixa o rodapé na parte inferior */
+    position: relative; /* Fixa o rodapé na parte inferior */
     bottom: 0; /* Garantir que o rodapé fique na parte inferior da tela */
     left: 0; /* Ocupa toda a largura */
     width: 100%; /* Largura total da página */
     border-radius: 10px;
-    z-index: 10; /* Garante que o rodapé fique sobre outros elementos */
+    
 }
 

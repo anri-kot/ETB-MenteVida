@@ -11,6 +11,49 @@
 
     </head>
     <body>
+        
+        <%
+            int idUser = -1;
+            int userCargo = -1;
+            boolean admin = false;
+            if (session.getAttribute("user") == null || session.getAttribute("cargo") == null || session.getAttribute("admin") == null) {
+                response.sendRedirect("index.jsp");
+            } else {
+                idUser = (int) session.getAttribute("user");
+                userCargo = (int) session.getAttribute("cargo");
+                admin = (boolean) session.getAttribute("admin");
+            }
+        %>
+
+        <header class="topo">
+            <img src="img/psc.png" alt="Logo da Clínica Mente & Vida" class="clinica-imagem">
+            <div>
+                <h1>Clínica Mente & Vida</h1>
+                <p>Saúde Mental e Bem-Estar</p>
+            </div>
+            <nav class="menu">
+                <nav class="menu">
+                <ul class="nav-list">
+                    <% if (!admin) { %>
+                    <li onclick="location = 'home.jsp'">Início</li>
+                    <li onclick="location = 'paciente.jsp'">Pacientes</li>
+                    <li onclick="location = 'medico.jsp'">Médicos</li>
+                    <li onclick="location = 'funcionario.jsp'">Funcionários</li>
+                    <li onclick="location = 'agendamento.jsp'">Agendamentos</li>
+                    <li onclick="location = 'consulta.jsp'">Consultas</li>
+                    <li onclick="location = 'prescricao.jsp'">Prescrições</li>
+                    <li onclick="location = 'relatorio.jsp'">Relatórios</li>
+                        <% } else { %>
+                    <li onclick="location = 'medico.jsp'">Médicos</li>
+                    <li onclick="location = 'funcionario.jsp'">Funcionários</li>
+                    <li onclick="location = 'usuario.jsp'">Gerenciar Usuários</li>
+                        <% } %>
+                    <li onclick="location = 'perfil.jsp'">Perfil</li>
+                </ul>
+            </nav>
+            </nav>
+        </header>
+
         <%
             int idMedico = 0;
             String nome = "";
@@ -18,7 +61,7 @@
             String telefone = "";
             String email = "";
             int idUsuario = 0;
-            
+
             boolean alterar = false;
             boolean usuarioExistente = false;
             String disabled = "";
@@ -39,7 +82,7 @@
                     usuarioExistente = true;
                     disabled = "disabled";
                 }
-                
+
                 alterar = true;
             }
         %>

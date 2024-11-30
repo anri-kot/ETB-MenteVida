@@ -13,6 +13,46 @@
         <link rel="stylesheet" href="css/relatorio.css">
     </head>
     <body>
+        <%
+            int idUser = -1;
+            int userCargo = -1;
+            boolean admin = false;
+            if (session.getAttribute("user") == null || session.getAttribute("cargo") == null || session.getAttribute("admin") == null) {
+                response.sendRedirect("index.jsp");
+            } else {
+                idUser = (int) session.getAttribute("user");
+                userCargo = (int) session.getAttribute("cargo");
+                admin = (boolean) session.getAttribute("admin");
+            }
+        %>
+
+
+        <header class="topo">
+            <img src="img/psc.png" alt="Logo da Clínica" class="clinica-imagem">
+            <div>
+                <h1>Clínica Mente & Vida</h1>
+                <p>Saúde Mental e Bem-Estar</p>
+            </div>
+            <nav class="menu">
+                <ul class="nav-list">
+                    <% if (!admin) { %>
+                    <li onclick="location = 'home.jsp'">Início</li>
+                    <li onclick="location = 'paciente.jsp'">Pacientes</li>
+                    <li onclick="location = 'medico.jsp'">Médicos</li>
+                    <li onclick="location = 'funcionario.jsp'">Funcionários</li>
+                    <li onclick="location = 'agendamento.jsp'">Agendamentos</li>
+                    <li onclick="location = 'consulta.jsp'">Consultas</li>
+                    <li onclick="location = 'prescricao.jsp'">Prescrições</li>
+                    <li onclick="location = 'relatorio.jsp'">Relatórios</li>
+                        <% } else { %>
+                    <li onclick="location = 'medico.jsp'">Médicos</li>
+                    <li onclick="location = 'funcionario.jsp'">Funcionários</li>
+                    <li onclick="location = 'usuario.jsp'">Gerenciar Usuários</li>
+                        <% } %>
+                    <li onclick="location = 'perfil.jsp'">Perfil</li>
+                </ul>
+            </nav>
+        </header>
 
         <%
             int idFuncionario = 0;
@@ -71,17 +111,17 @@
                         <%=idUsuario%>
                     </td>
                     <td>
-                        <form class="botoesAcao" action="gerenciaFuncionario.jsp" method="POST">
-                            <button>
+                        <form class="botoesAcao" action="gerenciaFuncionario.jsp" method="POST" onsubmit="return validarAcao(<%=admin%>, 0, 0)">
+                            <button class="btn-editar">
                                 Editar
                             </button>
                             <input type="hidden" name="idFuncionario" value="<%=idFuncionario%>">
                         </form>
 
-                        <form class="botoesAcao" action="ControleFuncionario" method="POST" onsubmit="return confirm('Você tem certeza de que quer excluir o funcionário <%=idFuncionario%>?');">
+                        <form class="botoesAcao" action="ControleFuncionario" method="POST" onsubmit="return validarAcao(<%=admin%>, 1, <%=idFuncionario%>)">
                             <input type="hidden" name="idFuncionario" value="<%=idFuncionario%>">
                             <input type="hidden" name="excluir" value="true">
-                            <button>
+                            <button class="btn-excluir">
                                 Excluir
                             </button>
                         </form>
@@ -93,9 +133,23 @@
                 %>
 
             </table>
-                
+
             <p><a href="gerenciaFuncionario.jsp" class="novo-relatorio">Novo Médico</a></p>
         </main>
 
+        <script>
+            function validarAcao(admin, acao, id) {
+                // acao = 0 -> editar; 1 -> excluir
+
+                if (!admin) {
+                    alert('Você não tem permissão de administrador.');
+                    return false;
+                } else if (acao !== 0) {
+                    return confirm('Você tem certeza de que quer excluir o funcionario ' + id + '?');
+                } else {
+                    return true;
+                }
+            }
+        </script>
     </body>
 </html>

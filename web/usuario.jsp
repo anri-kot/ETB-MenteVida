@@ -9,19 +9,35 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="A Clínica Mente & Vida oferece serviços especializados para o diagnóstico e tratamento de transtornos mentais.">
-        <link rel="stylesheet" href="css/usuario.css">
+        <link rel="stylesheet" href="css/paciente.css">
     </head>
     <body>
+         <header class="topo">
+        <img src="img/psc.png" alt="Logo da Clínica" class="clinica-imagem">
+        <div>
+            <h1>Clínica Mente & Vida</h1>
+            <p>Saúde Mental e Bem-Estar</p>
+        </div>
+        <nav class="menu">
+            <ul class="nav-list">
+                <li onclick="location = 'medico.jsp'">Médicos</li>
+                <li onclick="location = 'funcionario.jsp'">Funcionários</li>
+                <li onclick="location = 'usuario.jsp'">Gerenciar Usuários</li>
+                <li onclick="location = 'perfil.jsp'">Perfil</li>
+            </ul>
+        </nav>
+    </header>
         
         <main>
             <h2>Gerenciar Usuarios</h2>
             
             <p>
-                <form action="usuario.jsp" method="GET">
+                <form action="usuario.jsp" method="GET" style="display: inline-block">
                 Pesquisar: 
                     <input type="text" name="username" size="100" placeholder="insira um nome e clique em Pesquisar">
                     <input type="submit" value="Pesquisar">
                 </form>
+                <a href="gerenciaUsuario.jsp" class="novo-Usuario">Novo Usuario</a>
             </p>
 
             <table width="100%" border="1">
@@ -85,7 +101,7 @@
                     </td>
                     <td>
                         <form class="botoesAcao" action="gerenciaUsuario.jsp" method="POST">
-                            <button>
+                            <button class="btn-editar"> 
                                 Editar
                             </button>
                             <input type="hidden" name="idUsuario" value="<%=idUsuario%>">
@@ -94,7 +110,7 @@
                         <form class="botoesAcao" action="ControleUsuario" method="POST" onsubmit="return confirm('Você tem certeza de que quer excluir o usuario <%=idUsuario%>?');">
                             <input type="hidden" name="idUsuario" value="<%=idUsuario%>">
                             <input type="hidden" name="excluir" value="true">
-                            <button>
+                            <button class="btn-excluir"> 
                                 Excluir
                             </button>
                         </form>
@@ -105,7 +121,13 @@
                 %>
             </table>
 
-            <p><a href="gerenciaUsuario.jsp" class="novo-Usuario">Novo Usuario</a></p> 
         </main>
+           
+            
+        <script>
+            function submitForm(formulario) {
+                document.getElementById(formulario).submit();
+            }
+        </script>
     </body>
 </html>

@@ -3,12 +3,14 @@ package com.mentevida.dao;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Properties;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class ConnectionManager {
+
     // variables to assign properties to
     protected static String user;
     protected static String password;
@@ -16,16 +18,17 @@ public class ConnectionManager {
     protected static String driver;
     
     protected static String sisO = System.getProperty("os.name").toLowerCase();
-
+    
     protected static ConnectionManager connect; // receives the connection
     // starts connection if not started
+
     public static ConnectionManager getInstance() {
         if (connect == null) {
             return connect = new ConnectionManager();
         } else {
             return connect;
         }
-
+        
     }
 
     // effectively starts connection
@@ -38,11 +41,26 @@ public class ConnectionManager {
         password = prop.getProperty("password");
         dburl = prop.getProperty("dburl");
         driver = prop.getProperty("driver");
-
+        
         Class.forName(driver);
         return DriverManager.getConnection(dburl, user, password);
     }
     
+    protected static Properties getProperties() throws IOException {
+        Properties prop = new Properties();
+
+        // Carregar propriedades com ClassLoader
+        try (InputStream inputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("prop.properties")) {
+            if (inputStream == null) {
+                throw new FileNotFoundException("Properties file 'prop.properties' not found in classpath");
+            }
+            prop.load(inputStream);
+        }
+        
+        return prop;
+    }
+
+    /* ---- get properties file
     protected static Properties getProperties() throws FileNotFoundException, IOException {
         Properties prop = new Properties();
         FileInputStream fIS = null;
@@ -51,10 +69,10 @@ public class ConnectionManager {
         
         if (sisO.startsWith("win")) {
             // Windows
-            fIS = new FileInputStream("C:\\dev\\ETB\\EU\\ClinicaMenteVida\\prop.properties");
+            fIS = new FileInputStream(diretorioProjeto + "\\prop.properties");
         } else if (sisO.contains("linux")) {
             // Linux
-            fIS = new FileInputStream("/home/kuroneko/Dev/Java/netbeans/ClinicaMenteVida/prop.properties");
+            fIS = new FileInputStream(diretorioProjeto + "/prop.properties");
         } else {
             System.out.println("Sistema não suportado");
             fIS = null;
@@ -62,7 +80,7 @@ public class ConnectionManager {
         prop.load(fIS);
         return prop;
     }
-    
+     */
     public static String getUploads() throws IOException {
         Properties prop = getProperties();
         String dir = null;
@@ -79,16 +97,8 @@ public class ConnectionManager {
         if (sisO.startsWith("win")) {
             dir = "\\" + pasta + "\\";
         } else if (sisO.contains("linux")) {
-            dir = "/" + pasta +"/";
+            dir = "/" + pasta + "/";
         }
         return dir;
-    }
-
-    public static void main(String[] args)
-            throws ClassNotFoundException, FileNotFoundException, SQLException, IOException {
-        Connection con;
-        con = ConnectionManager.getConnection();
-        System.out.println(con);
-        System.out.println(System.getProperty("os.name"));
     }
 }
