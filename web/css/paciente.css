@@ -130,6 +130,7 @@ th, td {
     background-color: #c9e1e0; /* Cor ao passar o mouse */
 }
 
+
 .rodape {
     text-align: center;
     padding: 10px;
@@ -141,3 +142,14 @@ th, td {
     
 }
 
+.diretorios {
+    background-color: unset;
+    color: blue;
+    text-decoration: underline;
+}
+
+.diretorios:hover {
+    background-color: unset;
+    color: purple;
+    text-decoration: underline;
+}

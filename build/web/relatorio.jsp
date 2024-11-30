@@ -66,6 +66,10 @@
                         dataRelatorio = relatorio.getDataRelatorio();
                         endereco = relatorio.getEndereco();
                         idConsulta = relatorio.getConsulta().getIdConsulta();
+                        
+                        String linkRelatorio = endereco;
+                        
+                        linkRelatorio = linkRelatorio.replaceAll("\\$", "/");
                 %>
                 
                 <tr>
@@ -76,7 +80,7 @@
                         <%=dataRelatorio.format(dtf)%>
                     </td>
                     <td>
-                        <%=endereco%>
+                        <a class="diretorios" href="/ClinicaMenteVida/pdf?file=<%=linkRelatorio%>" target="_blank"> <%= endereco %> </a>
                     </td>
                     <td>
                         <%=idConsulta%>

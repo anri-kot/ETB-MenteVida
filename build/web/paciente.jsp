@@ -1,3 +1,4 @@
+<%@page import="com.mentevida.dao.ConnectionManager"%>
 <%@page import="java.time.format.DateTimeFormatter"%>
 <%@page import="java.util.List"%>
 <%@page import="com.mentevida.nucleo.Paciente"%>
@@ -68,6 +69,9 @@
                     }
                     
                     for (int i = 0; i < paciente.size(); i++) {
+                        String linkPaciente = paciente.get(i).getHistoricoMedico();
+                        
+                        linkPaciente = linkPaciente.replaceAll("\\$", "/");
                 %>
                 <tr>
                     <td>
@@ -86,7 +90,7 @@
                         <%= paciente.get(i).getEmail() %>
                     </td>
                     <td>
-                        <%= paciente.get(i).getHistoricoMedico() %>
+                        <a class="diretorios" href="/ClinicaMenteVida/pdf?file=<%=linkPaciente%>" target="_blank"> <%= paciente.get(i).getHistoricoMedico() %> </a>
                     </td>
                     <td>
                         <form class="botoesAcao" action="gerenciaPaciente.jsp" method="POST">
