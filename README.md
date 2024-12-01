@@ -20,7 +20,7 @@ O projeto foi codificado na IDE Apache Netbeans 17, outras IDEs e versões podem
 **2. Execute o script 'mentevida.sql' do banco de dados localizado na pasta Files.**  
 **3. Renomeie o arquivo 'template prop.properties' para 'prop.properties' e insira os dados requeridos.**  
 **3.1. Crie um diretório para salvar os arquivos que forem registrados e copie o caminho para os campos winuploads ou linuploads.**  
-**3.2 (Opcional) Mova os arquivos do drive para o diretório criado.**
+**3.2 (Opcional) Mova os arquivos do drive para o diretório criado.**  
 **4. Execute o projeto no Netbeans.**
 
 ## Login padrão
