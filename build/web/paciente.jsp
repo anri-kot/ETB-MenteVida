@@ -45,6 +45,9 @@
                     <input type="submit" value="Pesquisar">
                 </form>
             </p>
+            
+            <p><a href="gerenciaPaciente.jsp" class="novo-Paciente">Novo Paciente</a></p> 
+
 
             <table width="100%" border="1">
                 <tr>
@@ -114,7 +117,6 @@
                 %>
             </table>
 
-            <p><a href="gerenciaPaciente.jsp" class="novo-Paciente">Novo Paciente</a></p> 
         </main>
     </body>
 </html>

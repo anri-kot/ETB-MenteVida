@@ -50,6 +50,8 @@
         <main>
             <h2>Prescrições Registradas</h2>
 
+            <!-- Botão para adicionar um novo relatório, agora abaixo da tabela -->
+            <p><a href="gerenciaPrescricao.jsp" class="novo-relatorio">Nova Prescrição</a></p>
 
             <table width="100%" border="1">
                 <tr>
@@ -118,8 +120,7 @@
                 %>
 
             </table>
-            <!-- Botão para adicionar um novo relatório, agora abaixo da tabela -->
-            <p><a href="gerenciaPrescricao.jsp" class="novo-relatorio">Nova Prescrição</a></p>
+
         </main>
 
     </body>

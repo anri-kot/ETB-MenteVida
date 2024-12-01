@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 01, 2024 at 07:38 PM
+-- Generation Time: Dec 01, 2024 at 08:16 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -33,9 +33,9 @@ CREATE TABLE `agendamento` (
   `id_agendamento` int(11) NOT NULL,
   `data_agendamento` datetime DEFAULT NULL,
   `status` tinyint(4) DEFAULT NULL,
-  `paciente_id_paciente` int(11) NOT NULL,
-  `medico_id_medico` int(11) NOT NULL,
-  `funcionario_id_funcionario` int(11) NOT NULL
+  `paciente_id_paciente` int(11) DEFAULT NULL,
+  `medico_id_medico` int(11) DEFAULT NULL,
+  `funcionario_id_funcionario` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -52,7 +52,8 @@ INSERT INTO `agendamento` (`id_agendamento`, `data_agendamento`, `status`, `paci
 (10, '2024-11-12 12:00:00', 0, 5, 2, 1),
 (11, '2024-11-12 12:00:00', 0, 5, 2, 2),
 (12, '2024-11-12 12:00:00', 1, 7, 2, 2),
-(13, '2024-11-12 12:00:00', 1, 13, 2, 1);
+(13, '2024-11-12 12:00:00', 1, 13, 2, 1),
+(14, '1999-11-12 12:30:00', 1, NULL, 10, 14);
 
 -- --------------------------------------------------------
 
@@ -75,7 +76,7 @@ CREATE TABLE `consulta` (
 INSERT INTO `consulta` (`id_consulta`, `duracao`, `valor`, `id_paciente`, `id_medico`) VALUES
 (2, 40, 225, 5, 2),
 (3, 60, 275, 6, 2),
-(4, 40, 200, 12, 4);
+(6, 200, 150, 13, 10);
 
 -- --------------------------------------------------------
 
@@ -101,7 +102,8 @@ INSERT INTO `funcionario` (`id_funcionario`, `nome`, `telefone`, `email`, `cargo
 (2, 'Mariana Almeida', '12345678995', 'mariana@email.com', 'Gerente', 7),
 (3, 'Usuario Funcionario', '99988856452', 'usuario@email', 'Funcionario', 10),
 (4, 'Satoru Gojo', '61999551212', 'teste@email.com', 'Analista de Dados', 12),
-(14, 'Funcionario', '11111111111', 'funcionario@email', 'Atendente', 14);
+(14, 'Funcionario', '11111111111', 'funcionario@email', 'Atendente', 14),
+(15, 'Teste Func', '123456789', 'email@gmail', 'Atendente', 17);
 
 --
 -- Triggers `funcionario`
@@ -153,11 +155,12 @@ CREATE TABLE `medico` (
 --
 
 INSERT INTO `medico` (`id_medico`, `nome`, `especialidade`, `telefone`, `email`, `idUsuario`) VALUES
-(1, 'DEDEDE', 'Psicologia', '999999999', '12EEEE@email', 4),
+(1, 'DEDEDEDADA', 'Psicologia', '999999999', '12EEEE@email', 4),
 (2, 'Rafael Mendes', 'Psiquiatria', '1546582145', 'faelmendes@gmail.com', NULL),
 (3, 'Medico Administrador', 'Psiquiatria', '11111111111', 'asdklasjd@email.com', 9),
 (4, 'Gabriel Andre dos Santos', 'Psicologia', '61999995555', 'gabriel@email', 11),
-(9, 'Medico', 'Psiquiatria', '9999999999', 'email@gmail', 15);
+(9, 'Medico', 'Psiquiatria', '9999999999', 'email@gmail', 15),
+(10, 'Nov Medico Teste 2', 'Psiquiatria', '123456789', 'email@gmail', NULL);
 
 --
 -- Triggers `medico`
@@ -217,7 +220,8 @@ INSERT INTO `paciente` (`id_paciente`, `nome`, `data_nascimento`, `telefone`, `e
 (9, 'Murilo Couto', '1986-06-27', '7778895462', '785214569lkjhg@email.com', '$Pacientes$historico9MuriloCouto.pdf'),
 (11, 'Roberto Carlos', '1998-08-12', '7854123654', 'email@email.com', '$Pacientes$historico11RobertoCarlos.pdf'),
 (12, 'Luciano Hulk', '2000-02-05', '958623145698', 'caldeiraodohulkpobre@gmai.com', '$Pacientes$historico12LucianoHulk.pdf'),
-(13, 'Miguel O\'Hara', '1999-12-25', '12345678912', 'miguelsaikyou@hotmail.com', '$Pacientes$historico13MiguelO\'Hara.pdf');
+(13, 'Miguel O\'Hara', '1999-12-25', '12345678912', 'miguelsaikyou@hotmail.com', '$Pacientes$historico13MiguelO\'Hara.pdf'),
+(19, 'Novo Paciente Teste 2', '1999-12-02', '123456789', 'email@email', '$Pacientes$historico19NovoPacienteTeste.pdf');
 
 -- --------------------------------------------------------
 
@@ -255,7 +259,7 @@ CREATE TABLE `relatorio` (
   `id_relatorio` int(11) NOT NULL,
   `data_relatorio` date NOT NULL,
   `endereco` varchar(200) DEFAULT NULL,
-  `consulta_id_consulta` int(11) NOT NULL
+  `consulta_id_consulta` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -263,10 +267,9 @@ CREATE TABLE `relatorio` (
 --
 
 INSERT INTO `relatorio` (`id_relatorio`, `data_relatorio`, `endereco`, `consulta_id_consulta`) VALUES
-(2, '2022-09-15', '$Relatorios$relatorio2consulta3.pdf', 3),
+(2, '2024-09-15', '$Relatorios$relatorio2consulta3.pdf', 3),
 (4, '1998-02-15', '$Relatorios$relatorio4consulta3.pdf', 3),
-(5, '2022-11-05', '$Relatorios$relatorio5consulta2.pdf', 2),
-(7, '2005-10-11', '$Relatorios$relatorio7consulta3.pdf', 3);
+(5, '2022-11-05', '$Relatorios$relatorio5consulta2.pdf', 2);
 
 -- --------------------------------------------------------
 
@@ -296,7 +299,8 @@ INSERT INTO `usuario` (`idUsuario`, `username`, `senha`, `admin`) VALUES
 (12, 'eufuncionario', '4gkmw3ki6ko6ovge1xyyi37vdki9qnxh57lqfbcjyf64sx98b', 1),
 (13, 'testetesteteste12', '45auvrm8e57zm8y2dyh0s3ows1n3bit9vrxsqcaikpyj7j7izn', 0),
 (14, 'funcionario', '45auvrm8e57zm8y2dyh0s3ows1n3bit9vrxsqcaikpyj7j7izn', 1),
-(15, 'medico', '45auvrm8e57zm8y2dyh0s3ows1n3bit9vrxsqcaikpyj7j7izn', 1);
+(15, 'medico', '45auvrm8e57zm8y2dyh0s3ows1n3bit9vrxsqcaikpyj7j7izn', 1),
+(17, 'teste11', '45auvrm8e57zm8y2dyh0s3ows1n3bit9vrxsqcaikpyj7j7izn', 0);
 
 -- --------------------------------------------------------
 
@@ -321,7 +325,8 @@ INSERT INTO `usuarioassociacao` (`idUsuario`, `Cargo`) VALUES
 (11, 'Medico'),
 (12, 'Funcionario'),
 (14, 'Funcionario'),
-(15, 'Medico');
+(15, 'Medico'),
+(17, 'Funcionario');
 
 --
 -- Indexes for dumped tables
@@ -401,31 +406,31 @@ ALTER TABLE `usuarioassociacao`
 -- AUTO_INCREMENT for table `agendamento`
 --
 ALTER TABLE `agendamento`
-  MODIFY `id_agendamento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id_agendamento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `consulta`
 --
 ALTER TABLE `consulta`
-  MODIFY `id_consulta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_consulta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `funcionario`
 --
 ALTER TABLE `funcionario`
-  MODIFY `id_funcionario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id_funcionario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `medico`
 --
 ALTER TABLE `medico`
-  MODIFY `id_medico` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_medico` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `paciente`
 --
 ALTER TABLE `paciente`
-  MODIFY `id_paciente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id_paciente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `prescricao`
@@ -443,7 +448,7 @@ ALTER TABLE `relatorio`
 -- AUTO_INCREMENT for table `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- Constraints for dumped tables
@@ -453,16 +458,16 @@ ALTER TABLE `usuario`
 -- Constraints for table `agendamento`
 --
 ALTER TABLE `agendamento`
-  ADD CONSTRAINT `fk_agendamento_atendente1` FOREIGN KEY (`funcionario_id_funcionario`) REFERENCES `funcionario` (`id_funcionario`) ON DELETE NO ACTION ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_agendamento_medico1` FOREIGN KEY (`medico_id_medico`) REFERENCES `medico` (`id_medico`) ON DELETE NO ACTION ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_agendamento_paciente1` FOREIGN KEY (`paciente_id_paciente`) REFERENCES `paciente` (`id_paciente`) ON DELETE NO ACTION ON UPDATE CASCADE;
+  ADD CONSTRAINT `FK_Funcionario_Agendamento` FOREIGN KEY (`funcionario_id_funcionario`) REFERENCES `funcionario` (`id_funcionario`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_Medico_Agendamento` FOREIGN KEY (`medico_id_medico`) REFERENCES `medico` (`id_medico`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_Paciente_Agendamento` FOREIGN KEY (`paciente_id_paciente`) REFERENCES `paciente` (`id_paciente`) ON DELETE SET NULL ON UPDATE SET NULL;
 
 --
 -- Constraints for table `consulta`
 --
 ALTER TABLE `consulta`
-  ADD CONSTRAINT `consulta_ibfk_1` FOREIGN KEY (`id_paciente`) REFERENCES `paciente` (`id_paciente`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `consulta_ibfk_2` FOREIGN KEY (`id_medico`) REFERENCES `medico` (`id_medico`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `consulta_ibfk_1` FOREIGN KEY (`id_paciente`) REFERENCES `paciente` (`id_paciente`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `consulta_ibfk_2` FOREIGN KEY (`id_medico`) REFERENCES `medico` (`id_medico`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
 -- Constraints for table `funcionario`
@@ -486,7 +491,7 @@ ALTER TABLE `prescricao`
 -- Constraints for table `relatorio`
 --
 ALTER TABLE `relatorio`
-  ADD CONSTRAINT `fk_relatorio_consulta1` FOREIGN KEY (`consulta_id_consulta`) REFERENCES `consulta` (`id_consulta`) ON DELETE NO ACTION ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_relatorio_consulta1` FOREIGN KEY (`consulta_id_consulta`) REFERENCES `consulta` (`id_consulta`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `usuarioassociacao`

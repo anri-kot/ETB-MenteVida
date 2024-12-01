@@ -51,6 +51,8 @@
         <main>
             <h2>Consultas Registrados</h2>
 
+            <p><a href="gerenciaConsulta.jsp" class="novo-relatorio">Nova Consulta</a></p>
+
 
             <table width="100%" border="1">
                 <tr>
@@ -132,7 +134,6 @@
 
             </table>
                 
-            <p><a href="gerenciaConsulta.jsp" class="novo-relatorio">Nova Consulta</a></p>
         </main>
 
     </body>

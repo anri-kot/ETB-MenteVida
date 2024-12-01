@@ -66,6 +66,9 @@
         <main>
             <h2>Funcionarios Registrados</h2>
 
+            <p><a href="gerenciaFuncionario.jsp" class="novo-relatorio">Novo Funcionário</a></p>
+
+            
             <table width="100%" border="1">
                 <tr>
                     <th>ID</th>
@@ -134,7 +137,6 @@
 
             </table>
 
-            <p><a href="gerenciaFuncionario.jsp" class="novo-relatorio">Novo Médico</a></p>
         </main>
 
         <script>

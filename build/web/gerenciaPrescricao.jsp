@@ -93,7 +93,7 @@
 
         <div class="container">
             <a href="home.jsp" class="botoes" >Home</a>
-            <a href="relatorio.jsp" class="botoes" >Voltar</a>
+            <a href="prescricao.jsp" class="botoes" >Voltar</a>
         </div>
 
     </body>

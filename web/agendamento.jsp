@@ -41,7 +41,7 @@
             </ul>
         </nav>
     </header>
-
+        
         <%
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM-dd-yyyy HH:mm");
             AgendamentoDAO dao = new AgendamentoDAO();
@@ -68,6 +68,7 @@
         <main>
             <h2>Visualizar Agendamento</h2>
 
+            <p><a href="gerenciaAgendamento.jsp" class="novo-agendamento">Novo Agendamento</a></p>
             <table width="100%" border="1">
                 <thead>
                     <tr>

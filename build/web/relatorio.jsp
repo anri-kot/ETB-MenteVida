@@ -49,6 +49,9 @@
 
         <main>
             <h2>Relatórios Registrados</h2>
+            
+            <!-- Botão para adicionar um novo relatório, agora abaixo da tabela -->
+            <p><a href="gerenciaRelatorio.jsp" class="novo-relatorio">Novo Relatório</a></p>
 
             <table width="100%" border="1">
                 <tr>
@@ -102,8 +105,7 @@
                 %>
 
             </table>
-            <!-- Botão para adicionar um novo relatório, agora abaixo da tabela -->
-            <p><a href="gerenciaRelatorio.jsp" class="novo-relatorio">Novo Relatório</a></p>
+            
         </main>
 
     </body>

@@ -67,6 +67,7 @@
         <main>
             <h2>Medicos Registrados</h2>
 
+            <p><a href="gerenciaMedico.jsp" class="novo-relatorio">Novo Médico</a></p>
 
             <table width="100%" border="1">
                 <tr>
@@ -136,7 +137,6 @@
 
             </table>
 
-            <p><a href="gerenciaMedico.jsp" class="novo-relatorio">Novo Médico</a></p>
         </main>
 
         <script>
