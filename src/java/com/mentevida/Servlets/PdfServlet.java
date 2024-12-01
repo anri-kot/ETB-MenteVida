@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 package com.mentevida.Servlets;
 
 import com.mentevida.dao.ConnectionManager;
@@ -22,7 +18,7 @@ public class PdfServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String PDF_DIRECTORY = "/home/kuroneko/Dev/Uploads";
+        final String PDF_DIRECTORY = ConnectionManager.getUploads();
         
         // Get the PDF file path from the request
         String filePath = request.getParameter("file");
@@ -30,9 +26,13 @@ public class PdfServlet extends HttpServlet {
             response.sendError(HttpServletResponse.SC_BAD_REQUEST, "File path is required");
             return;
         }
+        
+        // Construct the file path
+        Path pdfPath = Paths.get(filePath).isAbsolute() 
+            ? Paths.get(filePath) 
+            : Paths.get(PDF_DIRECTORY, filePath);
 
         // Construct the full path to the PDF file, including inner directories
-        Path pdfPath = Paths.get(PDF_DIRECTORY, filePath);
         if (!Files.exists(pdfPath) || !Files.isRegularFile(pdfPath)) {
             response.sendError(HttpServletResponse.SC_NOT_FOUND, "File not found");
             return;
