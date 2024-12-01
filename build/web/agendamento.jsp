@@ -140,7 +140,6 @@
                     %>
                 </tbody>
             </table>
-            <p><a href="gerenciaAgendamento.jsp" class="novo-agendamento">Novo Agendamento</a></p>
         </main>
 
     </body>

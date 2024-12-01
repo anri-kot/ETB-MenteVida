@@ -53,6 +53,7 @@
 
                 idConsulta = consulta.getIdConsulta();
                 duracao = consulta.getDuracao();
+                valor = consulta.getValor();
                 idPaciente = consulta.getPaciente().getIdPaciente();
                 idMedico = consulta.getMedico().getIdMedico();
                 
@@ -75,7 +76,7 @@
             <input type="number" id="duracao" name="duracao" value="<%=duracao%>" placeholder="Entre com a duração da Consulta" required></input>
 
             <label for="valor">Valor (R$):</label>
-            <input type="number" id="valor" name="valor" placeholder="Entre com o valor da consulta" value="<%=valor%>" required>
+            <input type="number" id="valor" name="valor" placeholder="Entre com o valor da consulta" value="<%=valor%>" step=".01" required>
 
             <label for="paciente">Paciente (ID):</label>
             <input type="number" id="paciente" name="paciente" value="<%=idPaciente%>" placeholder="Entre com  ID do paciente" required>

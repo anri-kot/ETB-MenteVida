@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 01, 2024 at 08:16 PM
+-- Generation Time: Dec 01, 2024 at 11:58 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -18,10 +18,10 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `mentevida`
+-- Database: `mentevida2`
 --
-CREATE DATABASE IF NOT EXISTS `mentevida` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `mentevida`;
+CREATE DATABASE IF NOT EXISTS `mentevida2` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `mentevida2`;
 
 -- --------------------------------------------------------
 
@@ -43,17 +43,10 @@ CREATE TABLE `agendamento` (
 --
 
 INSERT INTO `agendamento` (`id_agendamento`, `data_agendamento`, `status`, `paciente_id_paciente`, `medico_id_medico`, `funcionario_id_funcionario`) VALUES
-(2, '2024-05-12 00:00:00', 0, 2, 1, 1),
-(5, '2024-11-12 12:00:00', 1, 5, 2, 1),
-(6, '2024-11-16 13:30:00', 1, 13, 2, 2),
-(7, '2000-12-25 00:00:00', 0, 12, 2, 1),
-(8, '2024-05-12 00:00:00', 1, 2, 1, 1),
-(9, '2024-11-12 12:00:00', 0, 5, 2, 1),
-(10, '2024-11-12 12:00:00', 0, 5, 2, 1),
-(11, '2024-11-12 12:00:00', 0, 5, 2, 2),
-(12, '2024-11-12 12:00:00', 1, 7, 2, 2),
-(13, '2024-11-12 12:00:00', 1, 13, 2, 1),
-(14, '1999-11-12 12:30:00', 1, NULL, 10, 14);
+(1, '2003-01-01 00:00:00', 1, 1, 1, 1),
+(2, '2010-10-10 10:00:00', 1, 2, 3, 3),
+(3, '2011-11-11 11:00:00', 1, 4, 4, 4),
+(4, '2012-12-12 12:00:00', 1, 5, 5, 5);
 
 -- --------------------------------------------------------
 
@@ -74,9 +67,10 @@ CREATE TABLE `consulta` (
 --
 
 INSERT INTO `consulta` (`id_consulta`, `duracao`, `valor`, `id_paciente`, `id_medico`) VALUES
-(2, 40, 225, 5, 2),
-(3, 60, 275, 6, 2),
-(6, 200, 150, 13, 10);
+(1, 120, 200, 1, 1),
+(2, 120, 200, 2, 3),
+(3, 150, 200, 3, 4),
+(4, 180, 249.99, 4, 5);
 
 -- --------------------------------------------------------
 
@@ -98,12 +92,11 @@ CREATE TABLE `funcionario` (
 --
 
 INSERT INTO `funcionario` (`id_funcionario`, `nome`, `telefone`, `email`, `cargo`, `idUsuario`) VALUES
-(1, 'Bianca Almeida', '8521597531', 'biancaal@hotmail.com', 'Recepcionista', NULL),
-(2, 'Mariana Almeida', '12345678995', 'mariana@email.com', 'Gerente', 7),
-(3, 'Usuario Funcionario', '99988856452', 'usuario@email', 'Funcionario', 10),
-(4, 'Satoru Gojo', '61999551212', 'teste@email.com', 'Analista de Dados', 12),
-(14, 'Funcionario', '11111111111', 'funcionario@email', 'Atendente', 14),
-(15, 'Teste Func', '123456789', 'email@gmail', 'Atendente', 17);
+(1, 'Usuário Comum', '22222222222', 'email@email', 'Atendente', 3),
+(2, 'Funcionário Exemplo', '6122551166', 'funcionario@exemplo', 'Atendente', 4),
+(3, 'Murilo Johan', '6155221144', 'murilojo@murilojo', 'Atendente', 9),
+(4, 'Felix Almeida', '6111225522', 'felix@felix', 'Estagiário', 10),
+(5, 'Lucas Teixeira', '6122552255', 'lucas@lucas', 'Atendente', 11);
 
 --
 -- Triggers `funcionario`
@@ -155,12 +148,11 @@ CREATE TABLE `medico` (
 --
 
 INSERT INTO `medico` (`id_medico`, `nome`, `especialidade`, `telefone`, `email`, `idUsuario`) VALUES
-(1, 'DEDEDEDADA', 'Psicologia', '999999999', '12EEEE@email', 4),
-(2, 'Rafael Mendes', 'Psiquiatria', '1546582145', 'faelmendes@gmail.com', NULL),
-(3, 'Medico Administrador', 'Psiquiatria', '11111111111', 'asdklasjd@email.com', 9),
-(4, 'Gabriel Andre dos Santos', 'Psicologia', '61999995555', 'gabriel@email', 11),
-(9, 'Medico', 'Psiquiatria', '9999999999', 'email@gmail', 15),
-(10, 'Nov Medico Teste 2', 'Psiquiatria', '123456789', 'email@gmail', NULL);
+(1, 'Administrador', 'Administrador', '1111111111', 'email@email', 1),
+(2, 'Médico Exemplo', 'Psiquiatria', '6199225544', 'medicoexemplo@medicoexemplo', 5),
+(3, 'Ana Maria', 'Psicologia', '6111221122', 'anamaria@anamaria', 6),
+(4, 'José Alencar', 'Psiquiatria', '6155221122', 'josealen@josealen', 7),
+(5, 'Roberto Nunes', 'Psicologia', '1125252525', 'robertonunes@robertonunes', 8);
 
 --
 -- Triggers `medico`
@@ -212,16 +204,11 @@ CREATE TABLE `paciente` (
 --
 
 INSERT INTO `paciente` (`id_paciente`, `nome`, `data_nascimento`, `telefone`, `email`, `historico_medico`) VALUES
-(2, 'Evil Neuro', '2020-01-01', '999999999', 'vedal987@email', '$Pacientes$historico2EvilNeuro.pdf'),
-(5, 'vedal', '1998-01-12', '9854123541', 'vedal@email', '$Pacientes$historico5vedal.pdf'),
-(6, 'lucas', '2008-05-21', '8541254615', 'lucas@email', '$Pacientes$historico6lucas.pdf'),
-(7, 'John Kennedy II', '2024-11-21', '854123645', 'asdasdsadsadsa@dsakdjsakdsadsa', '$Pacientes$historico7JohnKennedyII.pdf'),
-(8, 'Roberto Amaral', '2003-12-11', '856214638', 'robertoaldsakd@email.com', '$Pacientes$historico8RobertoAmaral.pdf'),
-(9, 'Murilo Couto', '1986-06-27', '7778895462', '785214569lkjhg@email.com', '$Pacientes$historico9MuriloCouto.pdf'),
-(11, 'Roberto Carlos', '1998-08-12', '7854123654', 'email@email.com', '$Pacientes$historico11RobertoCarlos.pdf'),
-(12, 'Luciano Hulk', '2000-02-05', '958623145698', 'caldeiraodohulkpobre@gmai.com', '$Pacientes$historico12LucianoHulk.pdf'),
-(13, 'Miguel O\'Hara', '1999-12-25', '12345678912', 'miguelsaikyou@hotmail.com', '$Pacientes$historico13MiguelO\'Hara.pdf'),
-(19, 'Novo Paciente Teste 2', '1999-12-02', '123456789', 'email@email', '$Pacientes$historico19NovoPacienteTeste.pdf');
+(1, 'Primeiro Paciente', '2000-01-01', '1111552212', 'paciente@email', '$Pacientes$PrimeiroPaciente'),
+(2, 'Isabel Melissa', '2000-01-22', '6122112211', 'isabel@isabel', '$Pacientes$historico2IsabelMelissa.pdf'),
+(3, 'Gabriel André dos Santos', '2000-10-12', '6199885522', 'gabriel@gabriel', '$Pacientes$historico3GabrielAndrédosSantos.pdf'),
+(4, 'Guilherme Cordeiro', '2001-12-12', '6188552211', 'guilherme@guilherme', '$Pacientes$historico4GuilhermeCordeiro.pdf'),
+(5, 'Danilo Cordeiro', '2002-11-20', '6188552211', 'danilo@danilo', '$Pacientes$historico5DaniloCordeiro.pdf');
 
 -- --------------------------------------------------------
 
@@ -243,11 +230,10 @@ CREATE TABLE `prescricao` (
 --
 
 INSERT INTO `prescricao` (`id_prescricao`, `data_prescricao`, `medicamentos`, `dosagem`, `comentario`, `id_consulta`) VALUES
-(2, '2024-12-11', 'medicamento 2, medicamento 3, medicamento 4', 'dosagem A e B', '888888', 3),
-(3, '2024-12-20', 'medicamento 4, medicamento 6, medicamento 4', 'dosagem F e D', 'Isto é mais um comentário', 2),
-(4, '2024-11-22', 'Medicamento X Sdklsal', '1 2e 3', 'Tomar sempre', 3),
-(6, '2024-12-12', 'medicamento1111', 'dosagem1111', 'instrucoes1111', 2),
-(7, '2024-12-12', 'medicamento1111222', 'dosagem1111222', 'aaaaaaaaaa', 2);
+(1, '2003-01-01', 'Medicamento 01, Medicamento 02', 'XX a cada XX horas.', 'Caso XX, fazer YY.', 1),
+(2, '2010-10-10', 'Paracetamol', 'Uma pílula por dia.', 'Parar depois que os sintomas desaparecerem', 2),
+(3, '2011-11-11', 'Dorflex', 'Uma pílula.', 'Só tomar quando os sintomas aparecerem.', 3),
+(4, '2012-12-12', 'Dipirona', 'Uma pílula.', 'Tomar se sintomas persistirem por mais de 30 minutos.', 4);
 
 -- --------------------------------------------------------
 
@@ -267,9 +253,10 @@ CREATE TABLE `relatorio` (
 --
 
 INSERT INTO `relatorio` (`id_relatorio`, `data_relatorio`, `endereco`, `consulta_id_consulta`) VALUES
-(2, '2024-09-15', '$Relatorios$relatorio2consulta3.pdf', 3),
-(4, '1998-02-15', '$Relatorios$relatorio4consulta3.pdf', 3),
-(5, '2022-11-05', '$Relatorios$relatorio5consulta2.pdf', 2);
+(1, '2003-01-01', '$Relatorios$relatorio1consulta1', 1),
+(2, '2010-10-10', '$Relatorios$relatorio2consulta2.pdf', 2),
+(3, '2011-11-11', '$Relatorios$relatorio3consulta3.pdf', 3),
+(4, '2012-12-12', '$Relatorios$relatorio4consulta4.pdf', 4);
 
 -- --------------------------------------------------------
 
@@ -289,18 +276,16 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`idUsuario`, `username`, `senha`, `admin`) VALUES
-(2, 'admin', '3hzi4r81f30g81bo5orq5ddbh3uuqoo28158si9djbh20p0sgo', 1),
+(1, 'admin', '45auvrm8e57zm8y2dyh0s3ows1n3bit9vrxsqcaikpyj7j7izn', 1),
 (3, 'user', '45auvrm8e57zm8y2dyh0s3ows1n3bit9vrxsqcaikpyj7j7izn', 0),
-(4, 'dada_user', '4ai62shviykclpd4zadmjhgdc6it8y6lqz2jfnj10di35visru', 0),
-(7, 'mariana1212', '45auvrm8e57zm8y2dyh0s3ows1n3bit9vrxsqcaikpyj7j7izn', 1),
-(9, 'medicoadmin', '3hzi4r81f30g81bo5orq5ddbh3uuqoo28158si9djbh20p0sgo', 1),
-(10, 'funcionarioteste', '4gkmw3ki6ko6ovge1xyyi37vdki9qnxh57lqfbcjyf64sx98b', 0),
-(11, 'gabrielmed', 'pcepgmq4e1fx3zw1ttkki37vjihe6vad91ewmgdynibbtqex1', 1),
-(12, 'eufuncionario', '4gkmw3ki6ko6ovge1xyyi37vdki9qnxh57lqfbcjyf64sx98b', 1),
-(13, 'testetesteteste12', '45auvrm8e57zm8y2dyh0s3ows1n3bit9vrxsqcaikpyj7j7izn', 0),
-(14, 'funcionario', '45auvrm8e57zm8y2dyh0s3ows1n3bit9vrxsqcaikpyj7j7izn', 1),
-(15, 'medico', '45auvrm8e57zm8y2dyh0s3ows1n3bit9vrxsqcaikpyj7j7izn', 1),
-(17, 'teste11', '45auvrm8e57zm8y2dyh0s3ows1n3bit9vrxsqcaikpyj7j7izn', 0);
+(4, 'funcionario', '45auvrm8e57zm8y2dyh0s3ows1n3bit9vrxsqcaikpyj7j7izn', 1),
+(5, 'medico', '45auvrm8e57zm8y2dyh0s3ows1n3bit9vrxsqcaikpyj7j7izn', 1),
+(6, 'anamaria', '45auvrm8e57zm8y2dyh0s3ows1n3bit9vrxsqcaikpyj7j7izn', 0),
+(7, 'josealencar', '45auvrm8e57zm8y2dyh0s3ows1n3bit9vrxsqcaikpyj7j7izn', 0),
+(8, 'robertonunes', '45auvrm8e57zm8y2dyh0s3ows1n3bit9vrxsqcaikpyj7j7izn', 0),
+(9, 'murilojohan', '45auvrm8e57zm8y2dyh0s3ows1n3bit9vrxsqcaikpyj7j7izn', 0),
+(10, 'felixalmeida', '45auvrm8e57zm8y2dyh0s3ows1n3bit9vrxsqcaikpyj7j7izn', 0),
+(11, 'lucasteixeira', '45auvrm8e57zm8y2dyh0s3ows1n3bit9vrxsqcaikpyj7j7izn', 0);
 
 -- --------------------------------------------------------
 
@@ -318,15 +303,16 @@ CREATE TABLE `usuarioassociacao` (
 --
 
 INSERT INTO `usuarioassociacao` (`idUsuario`, `Cargo`) VALUES
-(4, 'Medico'),
-(7, 'Funcionario'),
-(9, 'Medico'),
+(1, 'Medico'),
+(3, 'Funcionario'),
+(4, 'Funcionario'),
+(5, 'Medico'),
+(6, 'Medico'),
+(7, 'Medico'),
+(8, 'Medico'),
+(9, 'Funcionario'),
 (10, 'Funcionario'),
-(11, 'Medico'),
-(12, 'Funcionario'),
-(14, 'Funcionario'),
-(15, 'Medico'),
-(17, 'Funcionario');
+(11, 'Funcionario');
 
 --
 -- Indexes for dumped tables
@@ -406,49 +392,49 @@ ALTER TABLE `usuarioassociacao`
 -- AUTO_INCREMENT for table `agendamento`
 --
 ALTER TABLE `agendamento`
-  MODIFY `id_agendamento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id_agendamento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `consulta`
 --
 ALTER TABLE `consulta`
-  MODIFY `id_consulta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_consulta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `funcionario`
 --
 ALTER TABLE `funcionario`
-  MODIFY `id_funcionario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id_funcionario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `medico`
 --
 ALTER TABLE `medico`
-  MODIFY `id_medico` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_medico` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `paciente`
 --
 ALTER TABLE `paciente`
-  MODIFY `id_paciente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id_paciente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `prescricao`
 --
 ALTER TABLE `prescricao`
-  MODIFY `id_prescricao` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_prescricao` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `relatorio`
 --
 ALTER TABLE `relatorio`
-  MODIFY `id_relatorio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_relatorio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- Constraints for dumped tables
@@ -458,16 +444,16 @@ ALTER TABLE `usuario`
 -- Constraints for table `agendamento`
 --
 ALTER TABLE `agendamento`
-  ADD CONSTRAINT `FK_Funcionario_Agendamento` FOREIGN KEY (`funcionario_id_funcionario`) REFERENCES `funcionario` (`id_funcionario`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_Medico_Agendamento` FOREIGN KEY (`medico_id_medico`) REFERENCES `medico` (`id_medico`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_Paciente_Agendamento` FOREIGN KEY (`paciente_id_paciente`) REFERENCES `paciente` (`id_paciente`) ON DELETE SET NULL ON UPDATE SET NULL;
+  ADD CONSTRAINT `FK_Funcionario_Agendamento` FOREIGN KEY (`funcionario_id_funcionario`) REFERENCES `funcionario` (`id_funcionario`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_Medico_Agendamento` FOREIGN KEY (`medico_id_medico`) REFERENCES `medico` (`id_medico`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_Paciente_Agendamento` FOREIGN KEY (`paciente_id_paciente`) REFERENCES `paciente` (`id_paciente`) ON DELETE CASCADE ON UPDATE SET NULL;
 
 --
 -- Constraints for table `consulta`
 --
 ALTER TABLE `consulta`
-  ADD CONSTRAINT `consulta_ibfk_1` FOREIGN KEY (`id_paciente`) REFERENCES `paciente` (`id_paciente`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `consulta_ibfk_2` FOREIGN KEY (`id_medico`) REFERENCES `medico` (`id_medico`) ON DELETE SET NULL ON UPDATE CASCADE;
+  ADD CONSTRAINT `consulta_ibfk_1` FOREIGN KEY (`id_paciente`) REFERENCES `paciente` (`id_paciente`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `consulta_ibfk_2` FOREIGN KEY (`id_medico`) REFERENCES `medico` (`id_medico`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `funcionario`
