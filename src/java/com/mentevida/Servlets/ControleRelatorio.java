@@ -78,8 +78,18 @@ public class ControleRelatorio extends HttpServlet {
                 for (Part part : request.getParts()) {
                     part.write(diretorioReal);
                 }
+                
+                // formatar diretório real para o banco de dados
+                String sisO = System.getProperty("os.name").toLowerCase();
+                String divisor = "";
+                if (sisO.startsWith("win")) {
+                    divisor = "\\\\";
+                } else if (sisO.contains("linux")) {
+                    divisor = "/";
+                }
+                String diretorioFinal = diretorio.replaceAll(divisor, "\\$");
 
-                oRelatorio.setEndereco(diretorio);
+                oRelatorio.setEndereco(diretorioFinal);
                 dao.alterarRelatorio(oRelatorio);
             }
             

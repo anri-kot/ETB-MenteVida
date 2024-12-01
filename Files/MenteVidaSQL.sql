@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Nov 18, 2024 at 10:37 PM
+-- Host: 127.0.0.1
+-- Generation Time: Dec 01, 2024 at 07:38 PM
 -- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- PHP Version: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -209,15 +209,15 @@ CREATE TABLE `paciente` (
 --
 
 INSERT INTO `paciente` (`id_paciente`, `nome`, `data_nascimento`, `telefone`, `email`, `historico_medico`) VALUES
-(2, 'Evil Neuro', '2020-01-01', '999999999', 'vedal987@email', '/Pacientes/historico2EvilNeuro.pdf'),
-(5, 'vedal', '1998-01-12', '9854123541', 'vedal@email', 'C:\\historico\\historico2.pdf'),
-(6, 'lucas', '2008-05-21', '8541254615', 'lucas@email', 'C:\\historico\\historico2.pdf'),
-(7, 'John Kennedy II', '2024-11-21', '854123645', 'asdasdsadsadsa@dsakdjsakdsadsa', '/Pacientes/historico7JohnKennedy.pdf'),
-(8, 'Roberto Amaral', '2003-12-11', '856214638', 'robertoaldsakd@email.com', '/home/kuroneko/Dev/Uploads/Pacientes/historico8'),
-(9, 'Murilo Couto', '1986-06-27', '7778895462', '785214569lkjhg@email.com', '/home/kuroneko/Dev/Uploads/Pacientes/historico9'),
-(11, 'Roberto Carlos', '1998-08-12', '7854123654', 'email@email.com', '/Pacientes/historico11RobertoCarlos'),
-(12, 'Luciano Hulk', '2000-02-05', '958623145698', 'caldeiraodohulkpobre@gmai.com', '/Pacientes/historico12LucianoHulk'),
-(13, 'Miguel O\'Hara', '1999-12-25', '12345678912', 'miguelsaikyou@hotmail.com', '/Pacientes/historico13MiguelO\'Hara.pdf');
+(2, 'Evil Neuro', '2020-01-01', '999999999', 'vedal987@email', '$Pacientes$historico2EvilNeuro.pdf'),
+(5, 'vedal', '1998-01-12', '9854123541', 'vedal@email', '$Pacientes$historico5vedal.pdf'),
+(6, 'lucas', '2008-05-21', '8541254615', 'lucas@email', '$Pacientes$historico6lucas.pdf'),
+(7, 'John Kennedy II', '2024-11-21', '854123645', 'asdasdsadsadsa@dsakdjsakdsadsa', '$Pacientes$historico7JohnKennedyII.pdf'),
+(8, 'Roberto Amaral', '2003-12-11', '856214638', 'robertoaldsakd@email.com', '$Pacientes$historico8RobertoAmaral.pdf'),
+(9, 'Murilo Couto', '1986-06-27', '7778895462', '785214569lkjhg@email.com', '$Pacientes$historico9MuriloCouto.pdf'),
+(11, 'Roberto Carlos', '1998-08-12', '7854123654', 'email@email.com', '$Pacientes$historico11RobertoCarlos.pdf'),
+(12, 'Luciano Hulk', '2000-02-05', '958623145698', 'caldeiraodohulkpobre@gmai.com', '$Pacientes$historico12LucianoHulk.pdf'),
+(13, 'Miguel O\'Hara', '1999-12-25', '12345678912', 'miguelsaikyou@hotmail.com', '$Pacientes$historico13MiguelO\'Hara.pdf');
 
 -- --------------------------------------------------------
 
@@ -263,9 +263,10 @@ CREATE TABLE `relatorio` (
 --
 
 INSERT INTO `relatorio` (`id_relatorio`, `data_relatorio`, `endereco`, `consulta_id_consulta`) VALUES
-(2, '2022-09-15', 'C\\Relatorios\\relatorio2.pdf', 3),
-(4, '1998-02-15', '/home/kuroneko/Dev/Uploads/Relatorios/relatorio4consulta3', 3),
-(5, '2022-11-05', '/Relatorios/relatorio5consulta3.pdf', 2);
+(2, '2022-09-15', '$Relatorios$relatorio2consulta3.pdf', 3),
+(4, '1998-02-15', '$Relatorios$relatorio4consulta3.pdf', 3),
+(5, '2022-11-05', '$Relatorios$relatorio5consulta2.pdf', 2),
+(7, '2005-10-11', '$Relatorios$relatorio7consulta3.pdf', 3);
 
 -- --------------------------------------------------------
 
@@ -300,19 +301,19 @@ INSERT INTO `usuario` (`idUsuario`, `username`, `senha`, `admin`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `UsuarioAssociacao`
+-- Table structure for table `usuarioassociacao`
 --
 
-CREATE TABLE `UsuarioAssociacao` (
+CREATE TABLE `usuarioassociacao` (
   `idUsuario` int(11) NOT NULL,
   `Cargo` enum('Funcionario','Medico') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `UsuarioAssociacao`
+-- Dumping data for table `usuarioassociacao`
 --
 
-INSERT INTO `UsuarioAssociacao` (`idUsuario`, `Cargo`) VALUES
+INSERT INTO `usuarioassociacao` (`idUsuario`, `Cargo`) VALUES
 (4, 'Medico'),
 (7, 'Funcionario'),
 (9, 'Medico'),
@@ -386,9 +387,9 @@ ALTER TABLE `usuario`
   ADD PRIMARY KEY (`idUsuario`);
 
 --
--- Indexes for table `UsuarioAssociacao`
+-- Indexes for table `usuarioassociacao`
 --
-ALTER TABLE `UsuarioAssociacao`
+ALTER TABLE `usuarioassociacao`
   ADD PRIMARY KEY (`idUsuario`,`Cargo`),
   ADD UNIQUE KEY `idUsuario` (`idUsuario`);
 
@@ -406,7 +407,7 @@ ALTER TABLE `agendamento`
 -- AUTO_INCREMENT for table `consulta`
 --
 ALTER TABLE `consulta`
-  MODIFY `id_consulta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_consulta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `funcionario`
@@ -424,7 +425,7 @@ ALTER TABLE `medico`
 -- AUTO_INCREMENT for table `paciente`
 --
 ALTER TABLE `paciente`
-  MODIFY `id_paciente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id_paciente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `prescricao`
@@ -436,7 +437,7 @@ ALTER TABLE `prescricao`
 -- AUTO_INCREMENT for table `relatorio`
 --
 ALTER TABLE `relatorio`
-  MODIFY `id_relatorio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_relatorio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `usuario`
@@ -467,13 +468,13 @@ ALTER TABLE `consulta`
 -- Constraints for table `funcionario`
 --
 ALTER TABLE `funcionario`
-  ADD CONSTRAINT `FK_Funcionario_UsuarioAssoc` FOREIGN KEY (`idUsuario`) REFERENCES `UsuarioAssociacao` (`idUsuario`) ON DELETE SET NULL ON UPDATE CASCADE;
+  ADD CONSTRAINT `FK_Funcionario_UsuarioAssoc` FOREIGN KEY (`idUsuario`) REFERENCES `usuarioassociacao` (`idUsuario`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
 -- Constraints for table `medico`
 --
 ALTER TABLE `medico`
-  ADD CONSTRAINT `FK_Medico_UsuarioAssoc` FOREIGN KEY (`idUsuario`) REFERENCES `UsuarioAssociacao` (`idUsuario`) ON DELETE SET NULL ON UPDATE CASCADE;
+  ADD CONSTRAINT `FK_Medico_UsuarioAssoc` FOREIGN KEY (`idUsuario`) REFERENCES `usuarioassociacao` (`idUsuario`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
 -- Constraints for table `prescricao`
@@ -488,9 +489,9 @@ ALTER TABLE `relatorio`
   ADD CONSTRAINT `fk_relatorio_consulta1` FOREIGN KEY (`consulta_id_consulta`) REFERENCES `consulta` (`id_consulta`) ON DELETE NO ACTION ON UPDATE CASCADE;
 
 --
--- Constraints for table `UsuarioAssociacao`
+-- Constraints for table `usuarioassociacao`
 --
-ALTER TABLE `UsuarioAssociacao`
+ALTER TABLE `usuarioassociacao`
   ADD CONSTRAINT `UsuarioAssociacao_ibfk_1` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`idUsuario`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
