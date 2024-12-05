@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 01, 2024 at 11:58 PM
+-- Generation Time: Dec 05, 2024 at 09:54 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -18,10 +18,10 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `mentevida2`
+-- Database: `mentevida`
 --
-CREATE DATABASE IF NOT EXISTS `mentevida2` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `mentevida2`;
+CREATE DATABASE IF NOT EXISTS `mentevida` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `mentevida`;
 
 -- --------------------------------------------------------
 
@@ -69,8 +69,7 @@ CREATE TABLE `consulta` (
 INSERT INTO `consulta` (`id_consulta`, `duracao`, `valor`, `id_paciente`, `id_medico`) VALUES
 (1, 120, 200, 1, 1),
 (2, 120, 200, 2, 3),
-(3, 150, 200, 3, 4),
-(4, 180, 249.99, 4, 5);
+(3, 150, 200, 3, 4);
 
 -- --------------------------------------------------------
 
@@ -82,6 +81,7 @@ CREATE TABLE `funcionario` (
   `id_funcionario` int(11) NOT NULL,
   `nome` varchar(100) NOT NULL,
   `telefone` varchar(11) DEFAULT NULL,
+  `cpf` varchar(11) NOT NULL,
   `email` varchar(256) DEFAULT NULL,
   `cargo` varchar(100) DEFAULT NULL,
   `idUsuario` int(11) DEFAULT NULL
@@ -91,12 +91,13 @@ CREATE TABLE `funcionario` (
 -- Dumping data for table `funcionario`
 --
 
-INSERT INTO `funcionario` (`id_funcionario`, `nome`, `telefone`, `email`, `cargo`, `idUsuario`) VALUES
-(1, 'Usuário Comum', '22222222222', 'email@email', 'Atendente', 3),
-(2, 'Funcionário Exemplo', '6122551166', 'funcionario@exemplo', 'Atendente', 4),
-(3, 'Murilo Johan', '6155221144', 'murilojo@murilojo', 'Atendente', 9),
-(4, 'Felix Almeida', '6111225522', 'felix@felix', 'Estagiário', 10),
-(5, 'Lucas Teixeira', '6122552255', 'lucas@lucas', 'Atendente', 11);
+INSERT INTO `funcionario` (`id_funcionario`, `nome`, `telefone`, `cpf`, `email`, `cargo`, `idUsuario`) VALUES
+(1, 'Usuário Comum', '22222222222', '00000000001', 'email@email', 'Atendente', 3),
+(2, 'Funcionário Miguel', '6122551166', '00000000002', 'funcionario@exemplo', 'Atendente', 4),
+(3, 'Murilo Johan', '6155221144', '00000000003', 'murilojo@murilojo', 'Atendente', 9),
+(4, 'Felix Almeida', '6111225522', '00000000004', 'felix@felix', 'Estagiário', 10),
+(5, 'Lucas Teixeira', '6122552255', '00000000005', 'lucas@lucas', 'Atendente', 11),
+(6, 'Novo Funcionario', '6199223322', '00000000006', 'email@gmail', 'Atendente', 12);
 
 --
 -- Triggers `funcionario`
@@ -139,6 +140,7 @@ CREATE TABLE `medico` (
   `nome` varchar(100) NOT NULL,
   `especialidade` varchar(100) NOT NULL,
   `telefone` varchar(14) DEFAULT NULL,
+  `cpf` varchar(11) NOT NULL,
   `email` varchar(256) DEFAULT NULL,
   `idUsuario` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -147,12 +149,12 @@ CREATE TABLE `medico` (
 -- Dumping data for table `medico`
 --
 
-INSERT INTO `medico` (`id_medico`, `nome`, `especialidade`, `telefone`, `email`, `idUsuario`) VALUES
-(1, 'Administrador', 'Administrador', '1111111111', 'email@email', 1),
-(2, 'Médico Exemplo', 'Psiquiatria', '6199225544', 'medicoexemplo@medicoexemplo', 5),
-(3, 'Ana Maria', 'Psicologia', '6111221122', 'anamaria@anamaria', 6),
-(4, 'José Alencar', 'Psiquiatria', '6155221122', 'josealen@josealen', 7),
-(5, 'Roberto Nunes', 'Psicologia', '1125252525', 'robertonunes@robertonunes', 8);
+INSERT INTO `medico` (`id_medico`, `nome`, `especialidade`, `telefone`, `cpf`, `email`, `idUsuario`) VALUES
+(1, 'Administrador', 'Administrador', '1111111111', '00000000001', 'email@email', 1),
+(2, 'Médico Exemplo', 'Psiquiatria', '6199225544', '00000000002', 'medicoexemplo@medicoexemplo', 5),
+(3, 'Ana Maria', 'Psicologia', '6111221122', '00000000003', 'anamaria@anamaria', 6),
+(4, 'José Alencar', 'Psiquiatria', '6155221122', '00000000004', 'josealen@josealen', 7),
+(5, 'Roberto Nunes', 'Psicologia', '1125252525', '00000000005', 'robertonunes@robertonunes', 8);
 
 --
 -- Triggers `medico`
@@ -195,6 +197,7 @@ CREATE TABLE `paciente` (
   `nome` varchar(100) NOT NULL,
   `data_nascimento` date NOT NULL,
   `telefone` varchar(15) DEFAULT NULL,
+  `cpf` varchar(11) NOT NULL,
   `email` varchar(100) DEFAULT NULL,
   `historico_medico` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -203,12 +206,13 @@ CREATE TABLE `paciente` (
 -- Dumping data for table `paciente`
 --
 
-INSERT INTO `paciente` (`id_paciente`, `nome`, `data_nascimento`, `telefone`, `email`, `historico_medico`) VALUES
-(1, 'Primeiro Paciente', '2000-01-01', '1111552212', 'paciente@email', '$Pacientes$PrimeiroPaciente'),
-(2, 'Isabel Melissa', '2000-01-22', '6122112211', 'isabel@isabel', '$Pacientes$historico2IsabelMelissa.pdf'),
-(3, 'Gabriel André dos Santos', '2000-10-12', '6199885522', 'gabriel@gabriel', '$Pacientes$historico3GabrielAndrédosSantos.pdf'),
-(4, 'Guilherme Cordeiro', '2001-12-12', '6188552211', 'guilherme@guilherme', '$Pacientes$historico4GuilhermeCordeiro.pdf'),
-(5, 'Danilo Cordeiro', '2002-11-20', '6188552211', 'danilo@danilo', '$Pacientes$historico5DaniloCordeiro.pdf');
+INSERT INTO `paciente` (`id_paciente`, `nome`, `data_nascimento`, `telefone`, `cpf`, `email`, `historico_medico`) VALUES
+(1, 'Primeiro Paciente', '2000-01-01', '1111552212', '00000000001', 'paciente@email', '$Pacientes$PrimeiroPaciente'),
+(2, 'Isabel Melissa', '2000-01-22', '6122112211', '00000000002', 'isabel@isabel', '$Pacientes$historico2IsabelMelissa.pdf'),
+(3, 'Gabriel André dos Santos', '2000-10-12', '6199885522', '00000000003', 'gabriel@gabriel', '$Pacientes$historico3GabrielAndrédosSantos.pdf'),
+(4, 'Guilherme Cordeiro', '2001-12-12', '6188552211', '00000000004', 'guilherme@guilherme', '$Pacientes$historico4GuilhermeCordeiro.pdf'),
+(5, 'Danilo Cordeiro', '2002-11-20', '6188552211', '00000000005', 'danilo@danilo', '$Pacientes$historico5DaniloCordeiro.pdf'),
+(6, 'Teste Paciente', '2012-12-12', '61 99223399', '00000000006', 'emal@gmail.com', '$Pacientes$historico6TestePaciente.pdf');
 
 -- --------------------------------------------------------
 
@@ -232,8 +236,7 @@ CREATE TABLE `prescricao` (
 INSERT INTO `prescricao` (`id_prescricao`, `data_prescricao`, `medicamentos`, `dosagem`, `comentario`, `id_consulta`) VALUES
 (1, '2003-01-01', 'Medicamento 01, Medicamento 02', 'XX a cada XX horas.', 'Caso XX, fazer YY.', 1),
 (2, '2010-10-10', 'Paracetamol', 'Uma pílula por dia.', 'Parar depois que os sintomas desaparecerem', 2),
-(3, '2011-11-11', 'Dorflex', 'Uma pílula.', 'Só tomar quando os sintomas aparecerem.', 3),
-(4, '2012-12-12', 'Dipirona', 'Uma pílula.', 'Tomar se sintomas persistirem por mais de 30 minutos.', 4);
+(3, '2011-11-11', 'Dorflex', 'Uma pílula.', 'Só tomar quando os sintomas aparecerem.', 3);
 
 -- --------------------------------------------------------
 
@@ -256,7 +259,7 @@ INSERT INTO `relatorio` (`id_relatorio`, `data_relatorio`, `endereco`, `consulta
 (1, '2003-01-01', '$Relatorios$relatorio1consulta1', 1),
 (2, '2010-10-10', '$Relatorios$relatorio2consulta2.pdf', 2),
 (3, '2011-11-11', '$Relatorios$relatorio3consulta3.pdf', 3),
-(4, '2012-12-12', '$Relatorios$relatorio4consulta4.pdf', 4);
+(5, '2005-05-05', '$Relatorios$relatorio5consulta3.pdf', 3);
 
 -- --------------------------------------------------------
 
@@ -278,14 +281,15 @@ CREATE TABLE `usuario` (
 INSERT INTO `usuario` (`idUsuario`, `username`, `senha`, `admin`) VALUES
 (1, 'admin', '45auvrm8e57zm8y2dyh0s3ows1n3bit9vrxsqcaikpyj7j7izn', 1),
 (3, 'user', '45auvrm8e57zm8y2dyh0s3ows1n3bit9vrxsqcaikpyj7j7izn', 0),
-(4, 'funcionario', '45auvrm8e57zm8y2dyh0s3ows1n3bit9vrxsqcaikpyj7j7izn', 1),
+(4, 'funcionario', '4gkmw3ki6ko6ovge1xyyi37vdki9qnxh57lqfbcjyf64sx98b', 1),
 (5, 'medico', '45auvrm8e57zm8y2dyh0s3ows1n3bit9vrxsqcaikpyj7j7izn', 1),
 (6, 'anamaria', '45auvrm8e57zm8y2dyh0s3ows1n3bit9vrxsqcaikpyj7j7izn', 0),
 (7, 'josealencar', '45auvrm8e57zm8y2dyh0s3ows1n3bit9vrxsqcaikpyj7j7izn', 0),
 (8, 'robertonunes', '45auvrm8e57zm8y2dyh0s3ows1n3bit9vrxsqcaikpyj7j7izn', 0),
 (9, 'murilojohan', '45auvrm8e57zm8y2dyh0s3ows1n3bit9vrxsqcaikpyj7j7izn', 0),
 (10, 'felixalmeida', '45auvrm8e57zm8y2dyh0s3ows1n3bit9vrxsqcaikpyj7j7izn', 0),
-(11, 'lucasteixeira', '45auvrm8e57zm8y2dyh0s3ows1n3bit9vrxsqcaikpyj7j7izn', 0);
+(11, 'lucasteixeira', '28dj8alll8duem6u7rp5pw0vb3c69fyn887cbrgcld6nqr1qkl', 0),
+(12, 'novousuario1', '45auvrm8e57zm8y2dyh0s3ows1n3bit9vrxsqcaikpyj7j7izn', 1);
 
 -- --------------------------------------------------------
 
@@ -312,7 +316,8 @@ INSERT INTO `usuarioassociacao` (`idUsuario`, `Cargo`) VALUES
 (8, 'Medico'),
 (9, 'Funcionario'),
 (10, 'Funcionario'),
-(11, 'Funcionario');
+(11, 'Funcionario'),
+(12, 'Funcionario');
 
 --
 -- Indexes for dumped tables
@@ -340,6 +345,7 @@ ALTER TABLE `consulta`
 --
 ALTER TABLE `funcionario`
   ADD PRIMARY KEY (`id_funcionario`),
+  ADD UNIQUE KEY `cpf` (`cpf`),
   ADD UNIQUE KEY `idUsuario_2` (`idUsuario`),
   ADD KEY `idUsuario` (`idUsuario`);
 
@@ -348,6 +354,7 @@ ALTER TABLE `funcionario`
 --
 ALTER TABLE `medico`
   ADD PRIMARY KEY (`id_medico`),
+  ADD UNIQUE KEY `cpf` (`cpf`),
   ADD KEY `medico_ibfk_1` (`idUsuario`);
 
 --
@@ -375,7 +382,8 @@ ALTER TABLE `relatorio`
 -- Indexes for table `usuario`
 --
 ALTER TABLE `usuario`
-  ADD PRIMARY KEY (`idUsuario`);
+  ADD PRIMARY KEY (`idUsuario`),
+  ADD UNIQUE KEY `username` (`username`);
 
 --
 -- Indexes for table `usuarioassociacao`
@@ -392,7 +400,7 @@ ALTER TABLE `usuarioassociacao`
 -- AUTO_INCREMENT for table `agendamento`
 --
 ALTER TABLE `agendamento`
-  MODIFY `id_agendamento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_agendamento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `consulta`
@@ -404,7 +412,7 @@ ALTER TABLE `consulta`
 -- AUTO_INCREMENT for table `funcionario`
 --
 ALTER TABLE `funcionario`
-  MODIFY `id_funcionario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_funcionario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `medico`
@@ -416,7 +424,7 @@ ALTER TABLE `medico`
 -- AUTO_INCREMENT for table `paciente`
 --
 ALTER TABLE `paciente`
-  MODIFY `id_paciente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_paciente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `prescricao`
@@ -428,13 +436,13 @@ ALTER TABLE `prescricao`
 -- AUTO_INCREMENT for table `relatorio`
 --
 ALTER TABLE `relatorio`
-  MODIFY `id_relatorio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_relatorio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- Constraints for dumped tables
