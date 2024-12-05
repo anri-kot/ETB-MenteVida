@@ -41,11 +41,12 @@ public class ControleMedico extends HttpServlet {
                 String nome = request.getParameter("nome");
                 String especialidade = request.getParameter("especialidade");
                 String telefone = request.getParameter("telefone");
+                String cpf = request.getParameter("cpf");
                 String email = request.getParameter("email");
                 int idUsuario = Integer.parseInt(request.getParameter("idUsuario"));
 
                 // Operação Insert e Update
-                Medico medico = new Medico(idMedico, nome, especialidade, telefone, email, idUsuario, "", "", false);
+                Medico medico = new Medico(idMedico, nome, especialidade, telefone, cpf, email, idUsuario, "", "", false);
                 if (!alterar) {
                     dao.cadastrarMedico(medico);
                 } else {

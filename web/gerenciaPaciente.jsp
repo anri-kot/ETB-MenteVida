@@ -38,6 +38,7 @@
             String nome = "";
             String dataNascimento = "";
             String telefone = "";
+            String cpf = "";
             String email = "";
             String teste = "teste";
 
@@ -52,6 +53,7 @@
                 nome = paciente.getNome();
                 dataNascimento = paciente.getDataNascimento().toString();
                 telefone = paciente.getTelefone();
+                cpf = paciente.getCpf();
                 email = paciente.getEmail();
             }
         %>
@@ -68,6 +70,9 @@
 
                 <label for="telefone">Telefone:</label>
                 <input type="tel" id="telefone" name="telefone" value="<%= telefone%>" placeholder="Digite o telefone" required><br><br>
+                
+                <label for="cpf">CPF:</label>
+                <input type="number" id="cpf" name="cpf" value="<%=cpf%>" placeholder="Entre com o CPF do paciente" required> <small>(sem máscara, apenas números)</small>
 
                 <label for="email">Email:</label>
                 <input type="email" id="email" name="email" value="<%= email%>" placeholder="Digite o email" required><br><br>

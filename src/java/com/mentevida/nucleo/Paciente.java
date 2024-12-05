@@ -7,16 +7,18 @@ public class Paciente {
     private String nome;
     private LocalDate dataNascimento;
     private String telefone;
+    private String cpf;
     private String email;
     private String historicoMedico;
     
     public Paciente() {} // Construtor para gerar objetos genéricos
 
-    public Paciente(int idPaciente, String nome, LocalDate dataNascimento, String telefone, String email, String historicoMedico) {
+    public Paciente(int idPaciente, String nome, LocalDate dataNascimento, String telefone, String cpf, String email, String historicoMedico) {
         this.idPaciente = idPaciente;
         this.nome = nome;
         this.dataNascimento = dataNascimento;
         this.telefone = telefone;
+        this.cpf = cpf;
         this.email = email;
         this.historicoMedico = historicoMedico;
     }
@@ -27,6 +29,7 @@ public class Paciente {
                 "nome=" + getNome() +
                 "dataNascimento=" + getDataNascimento() +
                 "telefone=" + getTelefone() +
+                "cpf=" + getCpf() +
                 "email=" + getEmail() +
                 "historicoMedico=" + getHistoricoMedico() +
                 "]";
@@ -62,6 +65,14 @@ public class Paciente {
 
     public void setTelefone(String telefone) {
         this.telefone = telefone;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 
     public String getEmail() {

@@ -45,6 +45,7 @@ public class ControlePaciente extends HttpServlet {
         String nome = request.getParameter("nome");
         String data_nascimento = request.getParameter("data_nascimento");
         String telefone = request.getParameter("telefone");
+        String cpf = request.getParameter("cpf");
         String email = request.getParameter("email");
         boolean alterar = false;
         
@@ -57,14 +58,14 @@ public class ControlePaciente extends HttpServlet {
             PacienteDAO dao = new PacienteDAO();
             
             if (!alterar) {
-                paciente = new Paciente(0, nome, LocalDate.parse(data_nascimento), telefone, email, "");
+                paciente = new Paciente(0, nome, LocalDate.parse(data_nascimento), telefone, cpf, email, "");
                 
                 // adicionar campos do paciente
                 dao.cadastrarPaciente(paciente);
             } else {
                 int idPaciente = Integer.parseInt(request.getParameter("idPaciente"));
                 Paciente tempPaciente = dao.mostrarIdPacientes(idPaciente).get(0);
-                paciente = new Paciente(idPaciente, nome, LocalDate.parse(data_nascimento), telefone, email, tempPaciente.getHistoricoMedico());
+                paciente = new Paciente(idPaciente, nome, LocalDate.parse(data_nascimento), telefone, cpf, email, tempPaciente.getHistoricoMedico());
                 
                 dao.alterarPaciente(paciente);
             }

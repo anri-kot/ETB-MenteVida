@@ -59,12 +59,21 @@
             String nome = "";
             String funcao = "";
             String telefone = "";
+            String cpf = "";
             String email = "";
             int idUsuario = 0;
         %>
 
         <main>
             <h2>Funcionarios Registrados</h2>
+            
+            <p>
+                <form action="funcionario.jsp" method="GET">
+                Pesquisar: 
+                    <input type="text" name="pesquisa" size="100" placeholder="Pesquise por nome ou cpf">
+                    <input type="submit" value="Pesquisar">
+                </form>
+            </p>
 
             <p><a href="gerenciaFuncionario.jsp" class="novo-relatorio">Novo Funcionário</a></p>
 
@@ -75,14 +84,23 @@
                     <th>Nome</th>
                     <th>Função</th>
                     <th>Telefone</th>
+                    <th>CPF</th>
                     <th>Email</th>
                     <th>ID Usuario</th>
                     <th>Ações</th>
                 </tr>
                 <%
                     FuncionarioDAO dao = new FuncionarioDAO();
-                    List<Funcionario> listaFuncionario = dao.mostrarTodosFuncionarios();
+                    List<Funcionario> listaFuncionario = null;
                     Funcionario funcionario = null;
+                    
+                    String pesquisa = "";
+                    if (request.getParameter("pesquisa") != null) {
+                        pesquisa = (String) request.getParameter("pesquisa");
+                        listaFuncionario = dao.pesquisarFuncionarios(pesquisa);
+                    } else {
+                        listaFuncionario = dao.mostrarTodosFuncionarios();
+                    }
                     int i = 0;
                     while (i < listaFuncionario.size()) {
                         funcionario = listaFuncionario.get(i);
@@ -91,6 +109,12 @@
                         nome = funcionario.getNome();
                         funcao = funcionario.getCargo();
                         telefone = funcionario.getTelefone();
+                        cpf = funcionario.getCpf();
+                        cpf = String.format("%s.%s.%s-%s", 
+                            cpf.substring(0, 3), 
+                            cpf.substring(3, 6), 
+                            cpf.substring(6, 9), 
+                            cpf.substring(9, 11));
                         email = funcionario.getEmail();
                         idUsuario = funcionario.getIdUsuario();
                 %>
@@ -106,6 +130,9 @@
                     </td>
                     <td>
                         <%=telefone%>
+                    </td>
+                    <td>
+                        <%=cpf%>
                     </td>
                     <td>
                         <%=email%>

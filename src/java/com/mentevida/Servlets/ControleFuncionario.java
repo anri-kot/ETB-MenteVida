@@ -41,11 +41,12 @@ public class ControleFuncionario extends HttpServlet {
                 String nome = request.getParameter("nome");
                 String funcao = request.getParameter("funcao");
                 String telefone = request.getParameter("telefone");
+                String cpf = request.getParameter("cpf");
                 String email = request.getParameter("email");
                 int idUsuario = Integer.parseInt(request.getParameter("idUsuario"));
 
                 // Operação Insert e Update
-                Funcionario funcionario = new Funcionario(idFuncionario, nome, telefone, email, funcao, idUsuario, "", "", false);
+                Funcionario funcionario = new Funcionario(idFuncionario, nome, telefone, cpf, email, funcao, idUsuario, "", "", false);
                 if (!alterar) {
                     dao.cadastrarFuncionario(funcionario);
                 } else {

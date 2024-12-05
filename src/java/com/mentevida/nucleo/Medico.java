@@ -6,16 +6,18 @@ public class Medico extends Usuario {
     private String nome;
     private String especialidade;
     private String telefone;
+    private String cpf;
     private String email;
     
-    public Medico() {} // Construtor para gerar objetos genéricos
+    public Medico() {} // Construtor para gerar objetos genéricos    
 
-    public Medico(int idMedico, String nome, String especialidade, String telefone, String email, int idUsuario, String username, String senha, boolean isAdmin) {
+    public Medico(int idMedico, String nome, String especialidade, String telefone, String cpf, String email, int idUsuario, String username, String senha, boolean isAdmin) {
         super(idUsuario, username, senha, isAdmin);
         this.idMedico = idMedico;
         this.nome = nome;
         this.especialidade = especialidade;
         this.telefone = telefone;
+        this.cpf = cpf;
         this.email = email;
     }
     
@@ -24,6 +26,7 @@ public class Medico extends Usuario {
         return "[idFuncionario=" + getIdMedico() +
                 "nome=" + getNome() +
                 "telefone=" + getTelefone() +
+                "cpf=" + getCpf() +
                 "email=" + getEmail() +
                 "especialidade=" + getEspecialidade() +
                 "usuario=" + getIdUsuario() +
@@ -56,6 +59,14 @@ public class Medico extends Usuario {
 
     public String getTelefone() {
         return telefone;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 
     public void setTelefone(String telefone) {

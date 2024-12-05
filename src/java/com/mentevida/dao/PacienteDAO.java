@@ -92,12 +92,13 @@ public class PacienteDAO {
     public void cadastrarPaciente(Paciente oPaciente) throws SQLException {
         PreparedStatement st = null;
         try {
-            st = con.prepareStatement("insert into paciente (nome, data_nascimento, telefone, email, historico_medico) values (?, ?, ?, ?, ?)");
+            st = con.prepareStatement("insert into paciente (nome, data_nascimento, telefone, cpf, email, historico_medico) values (?, ?, ?, ?, ?, ?)");
             st.setString(1, oPaciente.getNome());
             st.setString(2, oPaciente.getDataNascimento().toString());
             st.setString(3, oPaciente.getTelefone());
-            st.setString(4, oPaciente.getEmail());
-            st.setString(5, oPaciente.getHistoricoMedico());
+            st.setString(4, oPaciente.getCpf());
+            st.setString(5, oPaciente.getEmail());
+            st.setString(6, oPaciente.getHistoricoMedico());
             
             st.executeUpdate();
         } finally {
@@ -110,14 +111,15 @@ public class PacienteDAO {
     public void alterarPaciente(Paciente oPaciente) throws SQLException {
         PreparedStatement st = null;
         try {
-            st = con.prepareStatement("update paciente set nome = ?, data_nascimento = ?, telefone = ?, email = ?, historico_medico = ? " +
+            st = con.prepareStatement("update paciente set nome = ?, data_nascimento = ?, telefone = ?, cpf= ?, email = ?, historico_medico = ? " +
                     "where id_paciente = ?");
             st.setString(1, oPaciente.getNome());
             st.setString(2, oPaciente.getDataNascimento().toString());
             st.setString(3, oPaciente.getTelefone());
-            st.setString(4, oPaciente.getEmail());
-            st.setString(5, oPaciente.getHistoricoMedico());
-            st.setInt(6, oPaciente.getIdPaciente());
+            st.setString(4, oPaciente.getCpf());
+            st.setString(5, oPaciente.getEmail());
+            st.setString(6, oPaciente.getHistoricoMedico());
+            st.setInt(7, oPaciente.getIdPaciente());
             
             st.executeUpdate();
         } finally {
@@ -147,10 +149,11 @@ public class PacienteDAO {
         String nome = rs.getString("nome");
         LocalDate dataNascimento = LocalDate.parse(rs.getString("data_nascimento"), dtf);
         String telefone = rs.getString("telefone");
+        String cpf = rs.getString("cpf");
         String email = rs.getString("email");
         String historicoMedico = rs.getString("historico_medico");
 
-        return new Paciente(idPaciente, nome, dataNascimento, telefone, email, historicoMedico);
+        return new Paciente(idPaciente, nome, dataNascimento, telefone, cpf, email, historicoMedico);
     }
 
     private void close(PreparedStatement st, ResultSet rs) throws SQLException {

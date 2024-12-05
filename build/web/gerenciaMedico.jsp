@@ -59,6 +59,7 @@
             String nome = "";
             String especialidade = "";
             String telefone = "";
+            String cpf = "";
             String email = "";
             int idUsuario = 0;
 
@@ -76,6 +77,7 @@
                 nome = medico.getNome();
                 especialidade = medico.getEspecialidade();
                 telefone = medico.getTelefone();
+                cpf = medico.getCpf();
                 email = medico.getEmail();
                 idUsuario = medico.getIdUsuario();
                 if (idUsuario > 0) {
@@ -101,6 +103,9 @@
 
             <label for="telefone">Telefone:</label>
             <input type="text" id="telefone" name="telefone" value="<%=telefone%>" placeholder="Entre com o telefone do médico" required>
+            
+            <label for="cpf">CPF:</label>
+            <input type="number" id="cpf" name="cpf" value="<%=cpf%>" placeholder="Entre com o CPF do médico" required> <small>(sem máscara, apenas números)</small>
 
             <label for="email">Email:</label>
             <input type="text" id="email" name="email" value="<%=email%>" placeholder="Entre com o email" required>

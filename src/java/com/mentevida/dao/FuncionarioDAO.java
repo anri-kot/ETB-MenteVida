@@ -100,6 +100,61 @@ public class FuncionarioDAO {
         }
     }
     
+    public List<Funcionario> mostrarNomeFuncionarios(String nome) throws Exception {
+        List<Funcionario> list = new ArrayList<>();
+        
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        try {
+            st = con.prepareStatement("select * from funcionario where nome like ?");
+            st.setString(1, "%" + nome + "%");
+            rs = st.executeQuery();
+            
+            // loop adiciona o objeto Funcionario numa lista
+            while (rs.next()) {
+                Funcionario tempFuncionario = rowToFuncionario(rs);
+                list.add(tempFuncionario);
+            }
+            return list;
+            
+        } finally {
+            if (st != null) {
+                st.close();
+            }
+            if (rs != null) {
+                rs.close();
+            }
+        }
+    }
+    
+    public List<Funcionario> pesquisarFuncionarios(String pesquisa) throws Exception {
+        List<Funcionario> list = new ArrayList<>();
+        
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        try {
+            st = con.prepareStatement("select * from funcionario where nome LIKE ? OR cpf LIKE ?");
+            st.setString(1, "%" + pesquisa + "%");
+            st.setString(2, "%" + pesquisa + "%");
+            rs = st.executeQuery();
+            
+            // loop adiciona o objeto Funcionario numa lista
+            while (rs.next()) {
+                Funcionario tempFuncionario = rowToFuncionario(rs);
+                list.add(tempFuncionario);
+            }
+            return list;
+            
+        } finally {
+            if (st != null) {
+                st.close();
+            }
+            if (rs != null) {
+                rs.close();
+            }
+        }
+    }
+    
     public void cadastrarFuncionario(Funcionario oFuncionario) throws Exception {
         PreparedStatement st = null;
         try {
@@ -118,12 +173,13 @@ public class FuncionarioDAO {
             st = con.prepareStatement("insert into funcionario (nome, telefone, email, cargo, idUsuario) values (?, ?, ?, ?, ?)");
             st.setString(1, oFuncionario.getNome());
             st.setString(2, oFuncionario.getTelefone());
-            st.setString(3, oFuncionario.getEmail());
-            st.setString(4, oFuncionario.getCargo());
+            st.setString(3, oFuncionario.getCpf());
+            st.setString(4, oFuncionario.getEmail());
+            st.setString(5, oFuncionario.getCargo());
             if (oFuncionario.getIdUsuario() != 0) {
-                st.setInt(5, oFuncionario.getIdUsuario());
+                st.setInt(6, oFuncionario.getIdUsuario());
             } else {
-                st.setNull(5, 0);
+                st.setNull(6, 0);
             }
             
             st.executeUpdate();
@@ -137,17 +193,18 @@ public class FuncionarioDAO {
     public void alterarFuncionario(Funcionario oFuncionario) throws Exception {
         PreparedStatement st = null;
         try {
-            st = con.prepareStatement("update funcionario set nome = ?, telefone = ?, email = ?, cargo = ?, idUsuario = ? where id_funcionario = ?");
+            st = con.prepareStatement("update funcionario set nome = ?, telefone = ?, cpf = ?, email = ?, cargo = ?, idUsuario = ? where id_funcionario = ?");
             st.setString(1, oFuncionario.getNome());
             st.setString(2, oFuncionario.getTelefone());
-            st.setString(3, oFuncionario.getEmail());
-            st.setString(4, oFuncionario.getCargo());
+            st.setString(4, oFuncionario.getTelefone());
+            st.setString(4, oFuncionario.getEmail());
+            st.setString(5, oFuncionario.getCargo());
             if (oFuncionario.getIdUsuario() > 0) {
-                st.setInt(5, oFuncionario.getIdUsuario());
+                st.setInt(6, oFuncionario.getIdUsuario());
             } else { 
-                st.setNull(5, 0);
+                st.setNull(6, 0);
             }
-            st.setInt(6, oFuncionario.getIdFuncionario());
+            st.setInt(7, oFuncionario.getIdFuncionario());
             
             st.executeUpdate();
         } finally {
@@ -188,16 +245,10 @@ public class FuncionarioDAO {
         int idFuncionario = rs.getInt("id_funcionario");
         String nome = rs.getString("nome");
         String telefone = rs.getString("telefone");
+        String cpf = rs.getString("cpf");
         String email = rs.getString("email");
         String cargo = rs.getString("cargo");
         
-        return new Funcionario(idFuncionario, nome, telefone, email, cargo, idUsuario, username, senha, admin);
-    }
-    
-    public static void main(String[] args) throws Exception {
-        FuncionarioDAO dao = new FuncionarioDAO();
-        Funcionario fun = new Funcionario(5, "Teste", "1234589", "teste", "teste", 13, "", "", false);
-        dao.alterarFuncionario(fun);
-        System.out.println(dao.mostrarTodosFuncionarios());
+        return new Funcionario(idFuncionario, nome, telefone, cpf, email, cargo, idUsuario, username, senha, admin);
     }
 }

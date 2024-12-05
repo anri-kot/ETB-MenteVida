@@ -4,16 +4,18 @@ public class Funcionario extends Usuario {
     private int idFuncionario;
     private String nome;
     private String telefone;
+    private String cpf;
     private String email;
     private String cargo;
     
     public Funcionario(){} // Construtor para gerar objectos genéricos
 
-    public Funcionario(int idFuncionario, String nome, String telefone, String email, String cargo, int idUsuario, String username, String senha, boolean isAdmin) {
+    public Funcionario(int idFuncionario, String nome, String telefone, String cpf, String email, String cargo, int idUsuario, String username, String senha, boolean isAdmin) {
         super(idUsuario, username, senha, isAdmin);
         this.idFuncionario = idFuncionario;
         this.nome = nome;
         this.telefone = telefone;
+        this.cpf = cpf;
         this.email = email;
         this.cargo = cargo;
     }
@@ -24,6 +26,7 @@ public class Funcionario extends Usuario {
                 "nome=" + getNome() +
                 "senha=" + getSenha() +
                 "telefone=" + getTelefone() +
+                "cpf=" + getCpf() +
                 "email=" + getEmail() +
                 "cargo=" + getCargo() +
                 "idUsuario=" + getIdUsuario() +
@@ -52,6 +55,14 @@ public class Funcionario extends Usuario {
 
     public void setTelefone(String telefone) {
         this.telefone = telefone;
+    }
+    
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 
     public String getEmail() {
