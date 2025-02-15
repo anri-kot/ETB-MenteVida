@@ -47,6 +47,13 @@ Este é o projeto final de curso da **Escola Técnica de Brasília (ETB)**. Ele 
 
 ---
 
+## 👥 Colaboradores
+- [@anri-kot](https://github.com/anri-kot)
+- [@DaniloCordeiroFelix](https://github.com/DaniloCordeiroFelix)
+- [@isabelmvm](https://github.com/isabelmvm)
+
+---
+
 ## 📜 Licença  
 Este projeto é apenas para fins acadêmicos e não deve ser utilizado para produção sem as devidas adaptações.
 
@@ -100,6 +107,13 @@ This is the final course project from **Escola Técnica de Brasília (ETB)**. It
 |------------|----------|------------------|
 | `funcionario` | `123` | Administrator |
 | `medico` | `123` | Administrator |
+
+---
+
+## 👥 Collaborators
+- [@anri-kot](https://github.com/anri-kot)
+- [@DaniloCordeiroFelix](https://github.com/DaniloCordeiroFelix)
+- [@isabelmvm](https://github.com/isabelmvm)
 
 ---
 
