@@ -17,7 +17,7 @@ Este é o projeto final de curso da **Escola Técnica de Brasília (ETB)**. Ele 
 ## 🚀 Instalação e Configuração
 
 ### 1️⃣ Download do Projeto  
-📥 Baixe o arquivo **ClinicaMenteVida.zip** [aqui](https://github.com/anri-kot/projetoFinalETB/releases/tag/v1.0.0).  
+📥 Baixe o arquivo **ClinicaMenteVida.zip** [aqui](https://github.com/anri-kot/ETB-MenteVida/releases/tag/v1.0.0).  
 
 📂 (Opcional) Baixe os arquivos de exemplo vinculados ao banco de dados [aqui](https://drive.google.com/drive/folders/16WK5XyNw0MqhegMSJ1r9R6dUCrOJGuz5?usp=sharing).
 
@@ -80,7 +80,7 @@ This is the final course project from **Escola Técnica de Brasília (ETB)**. It
 ## 🚀 Installation and Setup
 
 ### 1️⃣ Download the Project  
-📥 Download **ClinicaMenteVida.zip** [here](https://github.com/anri-kot/projetoFinalETB/releases/tag/v1.0.0).  
+📥 Download **ClinicaMenteVida.zip** [here](https://github.com/anri-kot/ETB-MenteVida/releases/tag/v1.0.0).  
 
 📂 (Optional) Download sample files linked to the database [here](https://drive.google.com/drive/folders/16WK5XyNw0MqhegMSJ1r9R6dUCrOJGuz5?usp=sharing).
 
